@@ -8,7 +8,7 @@ imdbFunction = ImdbFunction()
 csvOutput = CsvOutput()
 
 #input string
-q = 'hot magma'
+q = 'gravity'
 
 #adapt string for reddit or imdb query
 queryr = q.replace(" ","+")
