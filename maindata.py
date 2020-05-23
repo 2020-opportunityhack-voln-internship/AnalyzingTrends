@@ -2,10 +2,14 @@
 from redditfunction import RedditFunction
 from imdbfunction import ImdbFunction
 from csvoutput import CsvOutput
+from wikipediafunction import WikipediaFunction
+from youtubefunction import YoutubeFunction
 
 redditFunction = RedditFunction()
 imdbFunction = ImdbFunction()
 csvOutput = CsvOutput()
+wikipediaFunction = WikipediaFunction()
+youtubeFunction = YoutubeFunction()
 
 #input string
 q = 'gravity'
@@ -13,14 +17,19 @@ q = 'gravity'
 #adapt string for reddit or imdb query
 queryr = q.replace(" ","+")
 queryi = q.replace(" ","-")
+queryw = q.replace(" ","+")
+queryy = q.replace(" ","+")
 
 r = redditFunction.getPushshiftData(10, 1526428800,1589587200, queryr)
 i = imdbFunction.getIMDB(queryi)
+w = wikipediaFunction.getWiki(10, queryw)
+y = youtubeFunction.getYouTube(queryy)
 
 #URL lists
 print(r)
 print(i)
-
-mylist = r + i
+print(w)
+print(y)
+mylist = r + i + w + y
 
 csvOutput.csvwrite(mylist)
