@@ -5,7 +5,7 @@ from csvoutput import CsvOutput
 from wikipediafunction import WikipediaFunction
 from youtubefunction import YoutubeFunction
 from steamfunction import SteamFunction
-import time
+#import time
 from multiprocessing.pool import ThreadPool
 
 pool = ThreadPool(processes=1)
@@ -20,7 +20,7 @@ steamFunction = SteamFunction()
 #input string
 q = 'gravity'
 
-tic = time.perf_counter()
+#tic = time.perf_counter()
 
 #Run reddit in seperate thread to reduce execution time
 rThread = pool.apply_async(redditFunction.getPushshiftData, (100, 1526428800,1589587200, q))
@@ -33,8 +33,8 @@ s = steamFunction.getSteam(q)
 #get thread running for reddit's output
 r = rThread.get()
 
-toc = time.perf_counter()
-print(f"did the thing in {toc - tic:0.4f} seconds")
+#toc = time.perf_counter()
+#print(f"did the thing in {toc - tic:0.4f} seconds")
 
 #URL lists
 print(r)
