@@ -7,8 +7,7 @@ import re
 
 class SteamFunction :
 
-    def getSteam(self, q) :
- 
+    def getSteam(self, q, size) :
         querys = q.replace(" ","+")
         url = ('https://store.steampowered.com/search/?term=' + str(querys) + '&category1=998')
         resp = requests.get(url)
@@ -27,7 +26,7 @@ class SteamFunction :
                     SteamLinkList.append(link['href'])
 
         #remove first two irrelevant links
-        return SteamLinkList[2:12]
+        return SteamLinkList[2:size+2]
 
 #test = SteamFunction.getSteam(0, 'gravity')
 #print(test)

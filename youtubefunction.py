@@ -6,9 +6,11 @@ import re
 
 class YoutubeFunction :
     #This function returns a list of youtube video URLs
-    def getYouTube(self, q) :
+    def getYouTube(self, q, size) :
         
+            #adapt URL for YouTube query
             queryy = q.replace(" ","+")
+            #build url with search query and filter for view count using URI parameter &sp=CAMSAhAB
             url = ('https://www.youtube.com/results?search_query=' +str(queryy) + '&sp=CAMSAhAB')
             resp = requests.get(url)
             http_encoding = resp.encoding if 'charset' in resp.headers.get('content-type', '').lower() else None
@@ -24,7 +26,7 @@ class YoutubeFunction :
                 if('https://www.youtube.com/' + link['href'] not in ytLinkList) :
                     ytLinkList.append('https://www.youtube.com/' + link['href'])
                     
-            return ytLinkList[:10]
+            return ytLinkList[:size]
 
 
 #test = YoutubeFunction.getYouTube(0, 'gravity')

@@ -6,7 +6,7 @@ import re
 
 class ImdbFunction :
 
-    def getIMDB(self, q) :
+    def getIMDB(self, q, size) :
  
         queryi = q.replace(" ","-")
         url = ('https://www.imdb.com/search/keyword/?keywords=' + str(queryi) + '&ref_=fn_kw_kw_1&mode=detail&page=1&sort=moviemeter,asc')
@@ -27,7 +27,7 @@ class ImdbFunction :
                 if('https://www.imdb.com' + link['href'] not in imdbLinkList) :
                     imdbLinkList.append('https://www.imdb.com' + link['href'])
 
-        return imdbLinkList[:10]
+        return imdbLinkList[:size]
         
 #test = ImdbFunction.getIMDB(0, 'gravity')
 #print(test)

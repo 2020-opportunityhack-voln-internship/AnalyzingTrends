@@ -19,16 +19,16 @@ steamFunction = SteamFunction()
 
 #input string
 q = 'gravity'
-
+size = 1
 #tic = time.perf_counter()
 
 #Run reddit in seperate thread to reduce execution time
-rThread = pool.apply_async(redditFunction.getPushshiftData, (100, 1526428800,1589587200, q))
+rThread = pool.apply_async(redditFunction.getPushshiftData, (100, 1526428800,1589587200, q, size))
 
-i = imdbFunction.getIMDB(q)
-w = wikipediaFunction.getWiki(10, q)
-y = youtubeFunction.getYouTube(q)
-s = steamFunction.getSteam(q)
+i = imdbFunction.getIMDB(q, size)
+w = wikipediaFunction.getWiki(q, size)
+y = youtubeFunction.getYouTube(q, size)
+s = steamFunction.getSteam(q, size)
 
 #get thread running for reddit's output
 r = rThread.get()
