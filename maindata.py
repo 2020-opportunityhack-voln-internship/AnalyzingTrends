@@ -6,6 +6,9 @@ from wikipediafunction import WikipediaFunction
 from youtubefunction import YoutubeFunction
 from steamfunction import SteamFunction
 import time
+from multiprocessing.pool import ThreadPool
+
+pool = ThreadPool(processes=1)
 
 redditFunction = RedditFunction()
 imdbFunction = ImdbFunction()
@@ -15,14 +18,21 @@ youtubeFunction = YoutubeFunction()
 steamFunction = SteamFunction()
 
 #input string
-q = 'genetic engineering'
+q = 'gravity'
 
 tic = time.perf_counter()
-r = redditFunction.getPushshiftData(100, 1526428800,1589587200, q)
+
+#Run reddit in seperate thread to reduce execution time
+rThread = pool.apply_async(redditFunction.getPushshiftData, (100, 1526428800,1589587200, q))
+
 i = imdbFunction.getIMDB(q)
 w = wikipediaFunction.getWiki(10, q)
 y = youtubeFunction.getYouTube(q)
 s = steamFunction.getSteam(q)
+
+#get thread running for reddit's output
+r = rThread.get()
+
 toc = time.perf_counter()
 print(f"did the thing in {toc - tic:0.4f} seconds")
 
