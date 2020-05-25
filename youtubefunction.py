@@ -6,8 +6,9 @@ import re
 
 class YoutubeFunction :
     #This function returns a list of youtube video URLs
-    def getYouTube(self, queryy) :
+    def getYouTube(self, q) :
         
+            queryy = q.replace(" ","+")
             url = ('https://www.youtube.com/results?search_query=' +str(queryy) + '&sp=CAMSAhAB')
             resp = requests.get(url)
             http_encoding = resp.encoding if 'charset' in resp.headers.get('content-type', '').lower() else None
@@ -18,11 +19,12 @@ class YoutubeFunction :
             
             ytLinkList = []
             
+            #find links to videos
             for link in soup.find_all('a', href= re.compile('watch')) :
                 if('https://www.youtube.com/' + link['href'] not in ytLinkList) :
                     ytLinkList.append('https://www.youtube.com/' + link['href'])
                     
-            return ytLinkList
+            return ytLinkList[:10]
 
 
 #test = YoutubeFunction.getYouTube(0, 'gravity')

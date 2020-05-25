@@ -5,7 +5,8 @@ import json
 class RedditFunction :
     
     #This function returns a list of reddit post links
-    def getPushshiftData(self, size, after, before, queryr) :
+    def getPushshiftData(self, size, after, before, q) :
+        queryr = q.replace(" ","+")
         args = '&sort=desc&sort_type=score&over_18=false&score=>2000&size=' +str(size) + '&after=' + str(after) + '&before=' +str(before) + '&q=' + str(queryr)
         url = 'https://api.pushshift.io/reddit/search/submission/?' +str(args)
         print(url)
@@ -18,5 +19,6 @@ class RedditFunction :
         for post in data['data'] :
             fulllinks.append(post['full_link'])
             
-        return fulllinks
-   
+        return fulllinks[:10]
+#test = RedditFunction.getPushshiftData(0, 'gravity')
+#print(test)
