@@ -23,12 +23,12 @@ class YoutubeFunction :
             
             #find links to videos
             for link in soup.find_all('a', href= re.compile('watch')) :
-                if('https://www.youtube.com/' + link['href'] not in ytLinkList) :
-                    ytLinkList.append('https://www.youtube.com/' + link['href'])
+                if('https://www.youtube.com' + link['href'] not in ytLinkList) :
+                    ytLinkList.append('https://www.youtube.com' + link['href'])
                     
             return ytLinkList[:size]
 
 
-#test = YoutubeFunction.getYouTube(0, 'gravity')
-#print(test)
+test = YoutubeFunction.getYouTube(0, 'gravity', 2)
+print(test)
  
