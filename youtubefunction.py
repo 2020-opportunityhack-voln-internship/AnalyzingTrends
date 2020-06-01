@@ -29,6 +29,6 @@ class YoutubeFunction :
             return ytLinkList[:size]
 
 
-test = YoutubeFunction.getYouTube(0, 'gravity', 2)
-print(test)
+#test = YoutubeFunction.getYouTube(0, 'gravity', 2)
+#print(test)
  
