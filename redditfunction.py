@@ -20,5 +20,5 @@ class RedditFunction :
             fulllinks.append(post['full_link'])
             
         return fulllinks[:size]
-#test = RedditFunction.getPushshiftData(0, 'gravity')
+#test = RedditFunction.getPushshiftData(0, 100 ,1526428800,1589587200, 'gravity', 10)
 #print(test)

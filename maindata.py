@@ -5,6 +5,7 @@ from csvoutput import CsvOutput
 from wikipediafunction import WikipediaFunction
 from youtubefunction import YoutubeFunction
 from steamfunction import SteamFunction
+from twitterfunction import TwitterFunction
 #import time
 from multiprocessing.pool import ThreadPool
 
@@ -16,10 +17,10 @@ csvOutput = CsvOutput()
 wikipediaFunction = WikipediaFunction()
 youtubeFunction = YoutubeFunction()
 steamFunction = SteamFunction()
-
+twitterFunction = TwitterFunction()
 #input string
 q = 'gravity'
-size = 1
+size = 3
 #tic = time.perf_counter()
 
 #Run reddit in seperate thread to reduce execution time
@@ -29,7 +30,11 @@ i = imdbFunction.getIMDB(q, size)
 w = wikipediaFunction.getWiki(q, size)
 y = youtubeFunction.getYouTube(q, size)
 s = steamFunction.getSteam(q, size)
-
+t=[]
+ttuples = twitterFunction.getTwitter(q, size)
+for a_tuple in ttuples:
+    t.append(a_tuple[0])
+    
 #get thread running for reddit's output
 r = rThread.get()
 
@@ -42,6 +47,11 @@ print(i)
 print(w)
 print(y)
 print(s)
-mylist = r + i + w + y + s
+print(t)
+mylist = r + i + w + y + s + t
 
 csvOutput.csvwrite(mylist, q)
+
+wdata = wikipediaFunction.getWikiData(w)
+idata = imdbFunction.getIMDBData(i)
+tdata = ttuples
