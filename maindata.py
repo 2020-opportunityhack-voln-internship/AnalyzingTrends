@@ -26,6 +26,7 @@ size = 3
 #Run reddit in seperate thread to reduce execution time
 rThread = pool.apply_async(redditFunction.getPushshiftData, (100, 1526428800,1589587200, q, size))
 
+#get URLs from IMDb, Wikipedia, Youtube, Steam, and Twitter
 i = imdbFunction.getIMDB(q, size)
 w = wikipediaFunction.getWiki(q, size)
 y = youtubeFunction.getYouTube(q, size)
@@ -52,6 +53,9 @@ mylist = r + i + w + y + s + t
 
 csvOutput.csvwrite(mylist, q)
 
+#get pageview data from Wikipedia
 wdata = wikipediaFunction.getWikiData(w)
+#get Cumulative Worldwide Box Office Gross from IMDb
 idata = imdbFunction.getIMDBData(i)
+#get Twitter Likes for posts
 tdata = ttuples
