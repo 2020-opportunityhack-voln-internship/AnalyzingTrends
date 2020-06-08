@@ -4,6 +4,8 @@ from imdbfunction import ImdbFunction
 from csvoutput import CsvOutput
 from wikipediafunction import WikipediaFunction
 from youtubefunction import YoutubeFunction
+import web_scraper as webScraper
+
 
 redditFunction = RedditFunction()
 imdbFunction = ImdbFunction()
@@ -13,6 +15,12 @@ youtubeFunction = YoutubeFunction()
 
 #input string
 q = 'gravity'
+
+websites = ['askdruniverse', 'teachengineering']
+
+# scrap the website for the search query
+for website in websites:
+    webScraper.scrapWebsite(q, website)
 
 #adapt string for reddit or imdb query
 queryr = q.replace(" ","+")
