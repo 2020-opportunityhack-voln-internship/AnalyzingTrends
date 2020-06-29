@@ -12,7 +12,7 @@ class TwitterFunction:
         #retweets
         retweets = 20
         #begining search date, default 2 years before today
-        after = dt.date.today() - dt.timedelta(days = (730))
+        after = dt.date.today() - dt.timedelta(days = (731))
         #end search date, default today
         before = dt.date.today()
         #number of threads in pool, high numbers return more tweets but increase runtime, recommended <=4
