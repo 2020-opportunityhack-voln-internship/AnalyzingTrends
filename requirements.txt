@@ -1,0 +1,5 @@
+requests
+json
+bs4
+re
+twitterscraper == 1.4.0
