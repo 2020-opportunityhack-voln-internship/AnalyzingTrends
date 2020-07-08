@@ -5,7 +5,7 @@ import re
 #import time
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
+
 class ImdbFunction :
 
     def getIMDB(self, q, size) :
@@ -73,20 +73,27 @@ class ImdbFunction :
         #toc = time.perf_counter()
         #print(f"did the thing in {toc - tic:0.4f} seconds")
         
-    def getIMDBGraph(self, idata, q) :
-        df = pd.DataFrame(idata, columns=['Title','Gross','Rating','Rating Count'])
-        df.plot.bar(x='Title',y=['Gross'],rot=0,fontsize='small',title='Movie Popularity Comparison').set_ylabel('Gross Box Office Revenue($)')
-        ax2 = df['Rating Count'].plot(secondary_y=True, marker='o', color='red')
-        ax2.set_ylabel('Rating Count')
-        ax2.legend()
-        filename = q.replace(' ','_')
-        plt.savefig('imdb_' + str(filename)+'.png',bbox_inches='tight')
-        plt.show()
+    def getIMDBGraph(self, idata, q, genType) :
+        try:
+            df = pd.DataFrame(idata, columns=['Title','Gross','Rating','Rating Count'])
+            
+            df.plot.bar(x='Title',y=['Gross'],rot=0,fontsize='small',title='Movie Popularity Comparison').set_ylabel('Gross Box Office Revenue($)')
+            ax2 = df['Rating Count'].plot(secondary_y=True, marker='o', color='red')
+            ax2.set_ylabel('Rating Count')
+            ax2.legend()
+            filename = q.replace(' ','_')
+            if genType=='query':
+                plt.savefig('static/images/query/imdb.png',bbox_inches='tight')
+            if genType=='suggested':
+                plt.savefig('static/images/suggested/imdb_' + str(filename)+'.png',bbox_inches='tight')
+                plt.show()
+        except: 
+            print("Could not find IMDB data")
 
-# q = 'space'
 # # i = ['https://www.imdb.com/title/tt1355644/', 'https://www.imdb.com/title/tt2239822/']
-# i=ImdbFunction.getIMDB(0,q,5)
-# idata=ImdbFunction.getIMDBData(0,i)
+#q = 'space'
+#i=ImdbFunction.getIMDB(0,q,5)
+#idata=ImdbFunction.getIMDBData(0,i)
 # ImdbFunction.getIMDBGraph(0,idata,q)
 
 

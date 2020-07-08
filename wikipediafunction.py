@@ -50,7 +50,7 @@ class WikipediaFunction :
         return wikidict
     
     #This function produces two graphs for monthly pageview date for a given dictionary of data
-    def getWikiGraph(self, wdata, q) :
+    def getWikiGraph(self, wdata, q, genType) :
         #initial value to compare list lengths against
         maxlength = 0
         #initialize empty dictionary
@@ -81,13 +81,20 @@ class WikipediaFunction :
         plt.title('Monthly Wikipedia Pageviews', y=len(wdata)+len(wdata)/5)
         #plt.tight_layout
         plt.figlegend(bbox_to_anchor=(1.4,1))
-        plt.savefig('wiki_'+str(filename)+'.png',bbox_inches='tight')
+        if genType=='suggested':
+            plt.savefig('static/images/suggested/wiki_'+str(filename)+'.png',bbox_inches='tight')
+        if genType=='query':
+            plt.savefig('static/images/query/wiki.png',bbox_inches='tight')
         #plot second graph without subplots
         df.plot()
         plt.title('Monthly Wikipedia Pageviews')
         plt.legend(bbox_to_anchor=(.9,.75),
                    bbox_transform=plt.gcf().transFigure)
-        plt.savefig('wiki_' + str(filename)+'1.png',bbox_inches='tight')
+        if genType=='suggested':
+            plt.savefig('static/images/suggested/wiki_' + str(filename)+'1.png',bbox_inches='tight')
+        elif genType=='query':
+            plt.savefig('static/images/query/wiki1.png',bbox_inches='tight')
+            
         plt.show()
 # w = WikipediaFunction.getWiki(0, 'space',5)
 # wdata = WikipediaFunction.getWikiData(0,w)

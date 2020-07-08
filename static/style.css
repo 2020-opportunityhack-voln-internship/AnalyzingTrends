@@ -1,0 +1,67 @@
+h1 {
+    color: navajowhite;
+    font-variant-caps: all-small-caps;
+    font-size: 46px;
+}
+
+h2 {
+  color: purple;
+  font-size: 40px;
+
+}
+
+h3 {
+  color: white;
+  font-size: 36px;
+}
+
+li {
+  color: red;
+  font-size: 50px;
+}
+
+body {
+    background: lightblue;
+}
+/*
+@import "compass/css3";
+
+* {box-sizing: border-box;}
+
+ul {
+  position: relative;
+  top: 20px;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
+  
+  border: 2px solid black;
+  
+  font-size: 10px;
+  font-family: Arial, sans-serif;
+  
+
+  -webkit-overflow-scrolling: touch;
+}
+*/
+
+ul {
+  height: 100px;
+  width: 500px;
+  overflow: auto;
+  position: right;
+
+}
+
+li {
+  padding: 10px 20px;
+  
+  border-bottom: 1px solid #ccc;
+
+  color: green;
+  font-size: 15px;
+
+}
