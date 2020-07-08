@@ -3,3 +3,4 @@ twitterscraper == 1.4.0
 gunicorn
 flask
 pandas
+matplotlib
