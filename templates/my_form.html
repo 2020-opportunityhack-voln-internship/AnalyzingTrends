@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+
+<body>
+    <form id="postForm" method="POST">
+        <input placeholder="Query Word" name="text">
+        <input placeholder="Query Size" name="size">
+        <input id="search" type="submit">
+        <link rel="stylesheet" href="/static/style1.css">
+    </form>
+    <div id="loading" class="loader"></div>
+
+    <!-- the result of the search will be rendered inside this div -->
+    <div id="result"></div>
+    <script>
+  
+        // Submission handler for 'postForm'
+        $("#postForm").submit(function (event) {
+
+            // Override normal submission so we can use ajax on it
+            event.preventDefault();
+
+            // show loading icon before intensive backend process
+            $('#loading').show();
+            
+            // Get form values
+            var $form = $(this),
+                qWord = $form.find('input[name="text"]').val(),
+                qSize = $form.find('input[name="size"]').val(),
+                // important for some reason
+                url = $form.attr( 'action' );
+            
+
+            // Post data
+            var posting = $.post(url, {
+                text: qWord,
+                size: qSize
+            });
+
+            // Place returned HTML page in div 'result'
+            posting.done(function (data) {
+                $("#result").empty().append(data);
+                // hide loading icon after process completes
+                $('#loading').hide();
+            });
+        });
+
+    </script>
+</body>
+
+</html>

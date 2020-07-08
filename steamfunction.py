@@ -5,10 +5,22 @@ import requests
 import re
 import matplotlib.pyplot as plt
 import pandas as pd
+import time
 
 class SteamFunction :
 
-    def getSteam(self, q, size) :
+    
+    def getSteam(self, q, size):
+        x = 0
+        while x < 3:
+            s = SteamFunction.trySteam(0, q, size)
+            if len(s)==0:
+                x = x+1
+            else:
+                x = 3
+        return s
+            
+    def trySteam(self, q, size) :
         querys = q.replace(" ","+")
         url = ('https://store.steampowered.com/search/?term=' + str(querys) + '&category1=998')
         resp = requests.get(url)
@@ -67,23 +79,30 @@ class SteamFunction :
                 i = i+1
         for i, j in SteamData.items():
             if len(j) < monthslength:
-                   # j[0:0] = ([0] * (monthslength - len(j)))
                   j.extend(([0] * (monthslength - len(j))))
                  #print(i, len(j))
         for key, values in SteamData.items() :
             key = values.reverse()
         return SteamData
 
-    def getSteamGraph(self, sdata, q) :
-        df = pd.DataFrame.from_dict(sdata)
-        df = df.set_index('Date')
-        plot = df.plot(fontsize = 'small', title = 'Game Popularity Comparison',legend=None).set_ylabel('Peak Monthly Playercount')
-        plt.figlegend(bbox_to_anchor=(1.35,1),
-                           bbox_transform=plt.gcf().transFigure)
-        filename = q.replace(' ','_')
-        plt.savefig('steam_' + str(filename)+'.png',bbox_inches='tight')
-# q = 'space'
-# s = SteamFunction.getSteam(0, q ,3)
-# # s = ('https://store.steampowered.com/app/952060/Resident_Evil_3/','https://store.steampowered.com/app/244850/Space_Engineers/')
+
+    def getSteamGraph(self, sdata, q, genType) :
+        try:
+            df = pd.DataFrame.from_dict(sdata)
+            df = df.set_index('Date')
+            plot = df.plot(fontsize = 'small', title = 'Game Popularity Comparison',legend=None).set_ylabel('Peak Monthly Playercount')
+            plt.figlegend(bbox_to_anchor=(1.35,1),
+                               bbox_transform=plt.gcf().transFigure)
+            filename = q.replace(' ','_')
+            if genType=='query':
+                plt.savefig('static/images/query/steam.png',bbox_inches='tight')
+            if genType=='suggested':
+                plt.savefig('static/images/suggested/steam_' + str(filename)+'.png',bbox_inches='tight')
+        except:
+             print('steam broke')
+
+# q = 'gravity'
+# s = SteamFunction.getSteam(0, q , 4)
 # sdata = SteamFunction.getSteamData(0, s)
-# SteamFunction.getSteamGraph(0, sdata, q)
+# SteamFunction.getSteamGraph(0, sdata, q, 'query')
+

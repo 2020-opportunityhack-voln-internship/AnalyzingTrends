@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Output</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <h1>Your query is {{processed_text}}</h1>
+    <h1>Your query size is {{processed_size}}</h1>
+
+  <h2>Here's how popular {{processed_text}} is around the web:</h2>
+	<h3>Wikipedia</h3>
+	<img src="/static/images/query/wiki.png?{{random}}" alt="wikipedia1" width="30%" height="300">
+  	<img src="/static/images/query/wiki1.png?{{random}}" alt="wikipedia2" width="30%" height="300">
+  <ul>
+    {{wikilinks}}
+  </ul>
+  <h3>IMDb</h3>
+  	<img src="/static/images/query/imdb.png?{{random}}" alt="IMDb graph" width="30%">
+  <ul>
+{{imdblinks}}
+  </ul>
+  <h3>Steam</h3>
+  	<img src="/static/images/query/steam.png?{{random}}" alt="Steam graph" width="30%" height="300">
+
+  <ul>
+{{steamlinks}}
+  </ul>
+  <h2>Here are the learning resources we found related to {{processed_text}}</h2>
+
+  <h4>Main Page</h4>
+  <a href="http://localhost:777/">main page</a>
+  </body>
+</html>
+
+
