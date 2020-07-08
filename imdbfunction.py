@@ -3,7 +3,9 @@ from bs4.dammit import EncodingDetector
 import requests
 import re
 #import time
-
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
 class ImdbFunction :
 
     def getIMDB(self, q, size) :
@@ -41,22 +43,51 @@ class ImdbFunction :
             html_encoding = EncodingDetector.find_declared_encoding(resp.content, is_html=True)
             encoding = html_encoding or http_encoding
             soup = BeautifulSoup(resp.content, from_encoding=encoding,features="lxml")
+            #find block that contains grossing data            
             yikesGross = soup.find_all('div', class_='txt-block')
+            print(url)
+            try :
+                ratingstring = soup.find('div', class_='imdbRating').getText().split()
+                rating=ratingstring[0].replace('/10','')
+                ratingCount=int(ratingstring[1].replace(',',''))
             
+            except :
+                rating = 0
+                ratingCount = 0
+            #find grossing data in block
             for line in yikesGross:
                 if line.find(text=re.compile("Gross")):
                     theline = line
-            
-            mything=theline.getText()
-            gross = mything.split('$')[1].replace(',','').strip()
-            title = soup.find('title').getText().replace(' - IMDb','')
-            IMDBDataList.append((title,gross))
+            #find movie title
+            title = soup.find('title').getText().replace(' - IMDb','').replace(' ','\n')
+            #Try getting text, may otherwise fail if IMDb page does not have data listed
+            try :
+                mything=theline.getText()
+                gross = int(mything.split('$')[1].replace(',','').strip())
+                IMDBDataList.append((title,gross,rating,ratingCount))
+            except:
+                IMDBDataList.append((title, 0 ,rating,ratingCount))
+        #returns a tuple in format (TITLE, GROSS, RATING, RATING COUNT)
         return IMDBDataList
         
         #toc = time.perf_counter()
         #print(f"did the thing in {toc - tic:0.4f} seconds")
         
-        
-        
-    #i = ['https://www.imdb.com/title/tt0816692/', 'https://www.imdb.com/title/tt1355644/', 'https://www.imdb.com/title/tt2239822/']
-    #print(getIMDBData(0,i))
+    def getIMDBGraph(self, idata, q) :
+        df = pd.DataFrame(idata, columns=['Title','Gross','Rating','Rating Count'])
+        df.plot.bar(x='Title',y=['Gross'],rot=0,fontsize='small',title='Movie Popularity Comparison').set_ylabel('Gross Box Office Revenue($)')
+        ax2 = df['Rating Count'].plot(secondary_y=True, marker='o', color='red')
+        ax2.set_ylabel('Rating Count')
+        ax2.legend()
+        filename = q.replace(' ','_')
+        plt.savefig('imdb_' + str(filename)+'.png',bbox_inches='tight')
+        plt.show()
+
+# q = 'space'
+# # i = ['https://www.imdb.com/title/tt1355644/', 'https://www.imdb.com/title/tt2239822/']
+# i=ImdbFunction.getIMDB(0,q,5)
+# idata=ImdbFunction.getIMDBData(0,i)
+# ImdbFunction.getIMDBGraph(0,idata,q)
+
+
+
