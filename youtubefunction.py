@@ -21,6 +21,7 @@ class YoutubeFunction :
             print(url)
             
             ugly = soup.find_all('script')
+            print(ugly)
             for script in ugly:
                 print(script.text)
                 if 'videoId' in script.text:
