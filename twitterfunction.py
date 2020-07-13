@@ -1,4 +1,4 @@
-from twitterscraper import query_tweets
+from twitterscraper.query import query_tweets
 import datetime as dt
 
 class TwitterFunction:
