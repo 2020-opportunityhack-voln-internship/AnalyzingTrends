@@ -20,18 +20,23 @@ class YoutubeFunction :
             ytLinkList = []
             print(url)
             
-            ugly = soup.find_all('script')
-            print(ugly)
-            for script in ugly:
-                print(script.text)
-                if 'videoId' in script.text:
-                    myscript = script.text
-                    videoIDs = re.findall('watch\?v\=(\w+)',myscript)
-                    for video in videoIDs:
-                        link = 'https://www.youtube.com/watch?v='+str(video)
-                        if len(link) == 43:
-                            ytLinkList.append(link)
-            print('got nice links\n')
+            ugly = str(soup.find_all('script'))
+            videoIDs = re.findall('watch\?v\=(\w+)',ugly)
+            for video in videoIDs:
+                link = 'https://www.youtube.com/watch?v='+str(video)
+                if len(link) == 43:
+                    ytLinkList.append(link) 
+            
+            
+            # for script in ugly:
+            #     if 'videoId' in script.text:
+            #         myscript = script.text
+            #         videoIDs = re.findall('watch\?v\=(\w+)',myscript)
+            #         for video in videoIDs:
+            #             link = 'https://www.youtube.com/watch?v='+str(video)
+            #             if len(link) == 43:
+            #                 ytLinkList.append(link)
+            print(ytLinkList)
             return ytLinkList[:size]
 
 
