@@ -33,7 +33,8 @@ class TwitterFunction:
             # print(tweet.tweet_url.encode('utf-8'))
            # print(tweet.likes)
                TweetLinkList.append((('https://www.twitter.com' + tweet.tweet_url),tweet.likes))
-               
+        print('got tweets')
+        print((TweetLinkList))
         return TweetLinkList[:size]
     #test = getTwitter(0,'fluid dynamics',10)
     #print(test)
