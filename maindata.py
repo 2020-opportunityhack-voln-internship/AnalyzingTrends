@@ -75,4 +75,3 @@ class AppFunction:
         steamFunction.getSteamGraph(sdata, q, genType)
         imdbFunction.getIMDBGraph(idata, q, genType)
         return('Finished')
-    app(0, 'gravity', 5, 'query')
