@@ -115,8 +115,8 @@ color:#F4976C;
 
 }
 
-/*
-ul {
+
+.return ul {
   height: 100px;
   width: 500px;
   overflow: auto;
@@ -124,16 +124,16 @@ ul {
 
 }
 
-li {
+.return li {
   padding: 10px 20px;
   
   border-bottom: 1px solid #ccc;
 
-  color: green;
+  color: darkgray;
   font-size: 15px;
 
 }
-*/
+
 #accordion input {
   /*Hides the checkboxes (set this to visible to see what I mean if you're curious)*/
 display: none;
