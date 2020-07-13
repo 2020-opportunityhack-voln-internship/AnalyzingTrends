@@ -23,7 +23,7 @@ class TwitterFunction:
         qsize = 10
         #build initial list of tweet objects via scraper
         list_of_tweets = query_tweets(str(query) + ' min_replies:'+str(replies) +' min_faves:' +str(faves) +' min_retweets:'+str(retweets),qsize, after, before, poolsize)
-        print('found info\n')
+
         #sort tweet objects by likes property
         sorted_list_of_tweets = sorted(list_of_tweets, key=lambda tweet: tweet.likes, reverse=True)
         #create empty list to be populated
@@ -34,8 +34,8 @@ class TwitterFunction:
             # print(tweet.tweet_url.encode('utf-8'))
            # print(tweet.likes)
                TweetLinkList.append((('https://www.twitter.com' + tweet.tweet_url),tweet.likes))
-        print('got tweets')
-        print((TweetLinkList))
+ 
+ 
         return TweetLinkList[:size]
     #test = getTwitter(0,'fluid dynamics',10)
     #print(test)

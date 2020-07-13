@@ -17,7 +17,7 @@ class YoutubeFunction :
             html_encoding = EncodingDetector.find_declared_encoding(resp.content, is_html=True)
             encoding = html_encoding or http_encoding
             soup = BeautifulSoup(resp.content, from_encoding=encoding,features="lxml")
-
+            print('got soup\n\n')
             ytLinkList = []
             print(url)
             ugly = soup.find_all('script')
@@ -29,11 +29,11 @@ class YoutubeFunction :
                         link = 'https://www.youtube.com/watch?v='+str(video)
                         if len(link) == 43:
                             ytLinkList.append(link)
-
+            print('got nice links\n')
             return ytLinkList[:size]
 
 
-#test = YoutubeFunction.getYouTube(0, 'gravity', 10)
+#test = YoutubeFunction.getYouTube(0, 'electron', 5)
 #print(test)
  
 
