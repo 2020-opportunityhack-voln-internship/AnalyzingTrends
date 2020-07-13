@@ -39,9 +39,9 @@ class AppFunction:
         y = youtubeFunction.getYouTube(q, size)
         s = steamFunction.getSteam(q, size)
         t=[]
-        #ttuples = twitterFunction.getTwitter(q, size)
-        #for a_tuple in ttuples:
-            #t.append(a_tuple[0])
+        ttuples = twitterFunction.getTwitter(q, size)
+        for a_tuple in ttuples:
+            t.append(a_tuple[0])
             
         #get thread running for reddit's output
         r = rThread.get()
@@ -67,7 +67,7 @@ class AppFunction:
         #get Title, Cumulative Worldwide Box Office Gross, Rating, number of Ratings from IMDb
         idata = imdbFunction.getIMDBData(i)
         #get Twitter Likes for posts
-        #tdata = ttuples
+        tdata = ttuples
         #get Steam player data
         sdata = steamFunction.getSteamData(s)
         #----------- Generate Graphs -----------#
