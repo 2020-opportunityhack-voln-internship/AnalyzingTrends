@@ -4,3 +4,6 @@ flask
 pandas
 matplotlib
 requests
+coala-utils~=0.5.0
+lxml
+billiard
