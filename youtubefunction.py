@@ -17,6 +17,7 @@ class YoutubeFunction :
             html_encoding = EncodingDetector.find_declared_encoding(resp.content, is_html=True)
             encoding = html_encoding or http_encoding
             soup = BeautifulSoup(resp.content, from_encoding=encoding,features="lxml")
+            print(soup)
             print('got soup\n\n')
             ytLinkList = []
             print(url)
