@@ -16,13 +16,14 @@ class TwitterFunction:
         #end search date, default today
         before = dt.date.today()
         #number of threads in pool, high numbers return more tweets but increase runtime, recommended <=4
-        poolsize = 4
+        poolsize = 1
         #adapt query for exact match
         query = '"' + str(q) + '"'
         #max number of tweets found by each thread
         qsize = 10
         #build initial list of tweet objects via scraper
         list_of_tweets = query_tweets(str(query) + ' min_replies:'+str(replies) +' min_faves:' +str(faves) +' min_retweets:'+str(retweets),qsize, after, before, poolsize)
+        print('found info\n')
         #sort tweet objects by likes property
         sorted_list_of_tweets = sorted(list_of_tweets, key=lambda tweet: tweet.likes, reverse=True)
         #create empty list to be populated
