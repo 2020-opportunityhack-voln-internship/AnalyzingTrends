@@ -35,9 +35,9 @@ def my_form_post():
     wlinks = Markup(linkinfo[3])
     ylinks = Markup(linkinfo[4])
     ilinks = Markup(linkinfo[5])
-
+    twlinks = Markup(linkinfo[6])
     print(ilinks)
-    return render_template('return_form.html',processed_size=processed_size,processed_text=processed_text,random=randomn,imdblinks=ilinks,wikilinks=wlinks,steamlinks=slinks,redditlinks=rlinks,twitterlinks=tlinks,youlinks=ylinks)
+    return render_template('return_form.html',processed_size=processed_size,processed_text=processed_text,random=randomn,imdblinks=ilinks,wikilinks=wlinks,steamlinks=slinks,redditlinks=rlinks,twitterlinks=tlinks,youlinks=ylinks,twitchlinks = twlinks)
 
 if __name__ == "__main__":
     app.run(host="localhost", port=int("777"),debug=True,use_reloader=False)

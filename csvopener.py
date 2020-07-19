@@ -16,6 +16,7 @@ class CsvOpener:
         wlinks=""
         ylinks=""
         ilinks=""
+        twlinks=""
         
         with open('static/linklists/'+str(file), newline='') as csvfile:
             links = list(csv.reader(csvfile, delimiter = ','))[0]
@@ -33,8 +34,9 @@ class CsvOpener:
                     ylinks = ylinks + str(link)
                 if 'imdb.com' in link:
                     ilinks = ilinks + str(link)
-        
-        return rlinks,tlinks,slinks,wlinks,ylinks,ilinks
+                if 'twitch.tv' in link:
+                    twlinks = twlinks + str(link)
+        return rlinks,tlinks,slinks,wlinks,ylinks,ilinks,twlinks
         
 #linkinfo = CsvOpener.CsvOpen(0,'query','gravity')
 #ilinkstest = linkinfo[5]
