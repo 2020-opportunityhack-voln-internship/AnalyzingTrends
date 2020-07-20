@@ -56,10 +56,10 @@ class TwitchFunction:
             filename = q.replace(' ','_')
             if genType=='query':
                 plt.savefig('static/images/query/twitch.png',bbox_inches='tight')
-                #plt.savefig('static/images/query/twitch.png',bbox_inches='tight')
+   
             if genType=='suggested':
                 plt.savefig('static/images/suggested/twitch_' + str(filename)+'.png',bbox_inches='tight')
-                #plt.savefig('static/images/suggested/imdb_' + str(filename)+'.png',bbox_inches='tight')
+
                 plt.show()
         except:
             print("Could not find Twitch data")
@@ -73,4 +73,4 @@ class TwitchFunction:
 #idata =TwitchFunction.getTwitchData(0,id_s)
 #print(idata)
 #generate graph for the query
-#TwitchFunction.getTwitchGraph(0,idata,q,'query')
+#TwitchFunction.getTwitchGraph(0,idata,q,'suggested')

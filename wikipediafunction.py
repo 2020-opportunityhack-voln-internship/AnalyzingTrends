@@ -103,7 +103,7 @@ class WikipediaFunction :
         plt.legend(bbox_to_anchor=(.9,.75),
                    bbox_transform=plt.gcf().transFigure)
         if genType=='suggested':
-            plt.savefig('static/images/suggested/wiki_' + str(filename)+'1.png',bbox_inches='tight')
+            plt.savefig('static/images/suggested/wiki1_' + str(filename)+'.png',bbox_inches='tight')
         elif genType=='query':
             plt.savefig('static/images/query/wiki1.png',bbox_inches='tight')
             

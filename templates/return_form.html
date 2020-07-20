@@ -63,8 +63,8 @@
       <label for="check-1">Google Trends Info</label>
       <article>
 
-        <img src="/static/images/query/google.png?{{random}}" alt="Google Trends Graph" width="425" height="370">
-        <img src="/static/images/query/google1.png?{{random}}" alt="Google Trends Graph2" width="425" height="370">
+        <img src="/static/images{{location}}google{{qname}}.png?{{random}}" alt="Google Trends Graph" width="425" height="370">
+        <img src="/static/images{{location}}google1{{qname}}.png?{{random}}" alt="Google Trends Graph2" width="425" height="370">
         <ul class="return">
           {{trendlinks}}
         </ul>
@@ -80,8 +80,8 @@
       <label for="check-2">Wikipedia Info</label>
       <article>
 
-        <img src="/static/images/query/wiki.png?{{random}}" alt="wikipedia1" width="600" height="370">
-        <img src="/static/images/query/wiki1.png?{{random}}" alt="wikipedia2" width="600" height="370">
+        <img src="/static/images{{location}}wiki{{qname}}.png?{{random}}" alt="wikipedia1" width="600" height="370">
+        <img src="/static/images{{location}}wiki1{{qname}}.png?{{random}}" alt="wikipedia2" width="600" height="370">
         <ul class="return">
           {{wikilinks}}
         </ul>
@@ -96,7 +96,7 @@
       <input type="checkbox" id="check-3" />
       <label for="check-3">IMDb Info</label>
       <article>
-        <img src="/static/images/query/imdb.png?{{random}}" alt="IMDb graph" width="600" height="500">
+        <img src="/static/images{{location}}imdb{{qname}}.png?{{random}}" alt="IMDb graph" width="600" height="500">
         <ul class="return">
           {{imdblinks}}
         </ul>
@@ -111,7 +111,7 @@
       <input type="checkbox" id="check-4" />
       <label for="check-4">Steam Info</label>
       <article>
-        <img src="/static/images/query/steam.png?{{random}}" alt="Steam graph" width="600" height="400">
+        <img src="/static/images{{location}}steam{{qname}}.png?{{random}}" alt="Steam graph" width="600" height="400">
 
         <ul class="return">
           {{steamlinks}}
@@ -156,7 +156,7 @@
       <input type="checkbox" id="check-7" />
       <label for="check-7">Twitch Info</label>
       <article>
-	<img src="/static/images/query/twitch.png?{{random}}" alt="Twitch graph" width="600" height = "400">
+	<img src="/static/images{{location}}twitch{{qname}}.png?{{random}}" alt="Twitch graph" width="600" height = "400">
         <ul class="return">
 	{{twitchlinks}}
         </ul>

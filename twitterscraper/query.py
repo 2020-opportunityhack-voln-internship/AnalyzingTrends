@@ -27,7 +27,7 @@ HEADERS_LIST = [
 ]
 
 HEADER = {'User-Agent': random.choice(HEADERS_LIST), 'X-Requested-With': 'XMLHttpRequest'}
-logger.info(HEADER)
+#logger.info(HEADER)
 
 INIT_URL = 'https://twitter.com/search?f=tweets&vertical=default&q={q}&l={lang}'
 RELOAD_URL = 'https://twitter.com/i/search/timeline?f=tweets&vertical=' \
@@ -231,7 +231,7 @@ def query_tweets(query, limit=None, begindate=dt.date(2006, 3, 21), enddate=dt.d
     all_tweets = []
     try:
         pool = Pool(poolsize)
-        logger.info('queries: {}'.format(queries))
+        #logger.info('queries: {}'.format(queries))
         try:
             for new_tweets in pool.imap_unordered(partial(query_tweets_once, limit=limit_per_pool, lang=lang), queries):
                 all_tweets.extend(new_tweets)

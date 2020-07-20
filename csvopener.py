@@ -4,11 +4,12 @@ import csv
 class CsvOpener:
 
     def CsvOpen(self,genType,q) :
-        q = q.replace(' ','-')
+        q = q.replace(' ','_')
         if genType == 'query':
             file = 'query/query.csv'
         elif genType == 'suggested':
             file = 'suggested/'+str(q) +'.csv'
+
         
         rlinks=""
         tlinks=""

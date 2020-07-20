@@ -25,6 +25,7 @@ class TrendsFunction:
         plt.title('Search Interest Over Time')
         plt.ylabel('Relative Interest')
         plt.xlabel('Date')
+        filename = q.replace(' ','_')
         if genType=='query':
             plt.savefig('static/images/query/google.png',bbox_inches='tight')
         if genType=='suggested':
@@ -46,7 +47,6 @@ class TrendsFunction:
             plt.ylabel('Relative Similarity')
             plt.xlabel('Related Topics')
             plt.title('People who searched for ' + str(q) + ' also searched for:')
-            filename = q.replace(' ','_')
             if genType=='query':
                 plt.savefig('static/images/query/google1.png',bbox_inches='tight')
             if genType=='suggested':
@@ -54,6 +54,6 @@ class TrendsFunction:
             
             return(trendlist)
         
-    testlist = getTrends(0,'gravity','query')
-    print(testlist)
+    #testlist = getTrends(0,'gravity','query')
+    #print(testlist)
     
