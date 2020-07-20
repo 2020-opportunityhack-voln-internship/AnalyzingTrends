@@ -12,7 +12,7 @@ class SuggestedFunction:
     
     def load_suggested(self):
         
-        for item in suggestedlist:
+        for item in SuggestedFunction.suggestedlist:
             AppFunction.app(0, item, 5, 'suggested')
             time.sleep(15)
     
