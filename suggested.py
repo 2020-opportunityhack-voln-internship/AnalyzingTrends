@@ -27,3 +27,5 @@ class SuggestedFunction:
     
 #test = SuggestedFunction.suggested_html()
 #print(test)
+
+#SuggestedFunction.load_suggested(0)
