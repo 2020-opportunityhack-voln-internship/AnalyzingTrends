@@ -19,7 +19,8 @@ class ScrapeFunction:
         chrome_options.add_argument("--proxy-bypass-list=*")
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_argument("--no-sandbox")
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN") 
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        chrome_options.binary_location = GOOGLE_CHROME_BIN
     
         return chrome_options
     # This functions scraps the website "https://askdruniverse.wsu.edu/"
@@ -27,7 +28,7 @@ class ScrapeFunction:
     def scrape_askdruniverse(search_query, website, website_link,chrome_options, total_link_results):
     
         # to get to the search element in the browser
-        browser = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH"),options=chrome_options)
+        browser = webdriver.Chrome(executable_path = CHROMEDRIVER_PATH ,options=chrome_options)
         browser.get(website_link)
         search_element = browser.find_element_by_id("site-header-widgets-open").click()
         time.sleep(2)
@@ -131,5 +132,5 @@ class ScrapeFunction:
             website_link = 'https://www.teachengineering.org/k12engineering/what'
             ScrapeFunction.scrape_teachengineering(search_query, website, website_link, chrome_options, total_results)
 
-
+#test = ScrapeFunction.scrapWebsite(0,"acid", 'askdruniverse', 5)
 
