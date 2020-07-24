@@ -53,8 +53,8 @@ class CsvOpener:
         with open('static/linklists/'+str(file), newline='') as csvfile:
             links = list(csv.reader(csvfile, delimiter = ','))[0]
             for link in links:
-            link = '<li><a href="'+str(link)+'" target="_blank">'+str(link)+'</a></li>'
-            telinks = telinks + str(link)
+                link = '<li><a href="'+str(link)+'" target="_blank">'+str(link)+'</a></li>'
+                telinks = telinks + str(link)
             
         
 
@@ -70,8 +70,8 @@ class CsvOpener:
         with open('static/linklists/'+str(file), newline='') as csvfile:
             links = list(csv.reader(csvfile, delimiter = ','))[0]
             for link in links:
-            link = '<li><a href="'+str(link)+'" target="_blank">'+str(link)+'</a></li>'
-            alinks = alinks + str(link)            
+                link = '<li><a href="'+str(link)+'" target="_blank">'+str(link)+'</a></li>'
+                alinks = alinks + str(link)            
             
                     
         
