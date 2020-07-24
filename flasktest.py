@@ -4,18 +4,21 @@ from maindata import AppFunction
 from random import random
 from csvopener import CsvOpener
 from suggested import SuggestedFunction
+from websites_scraper import ScrapeFunction
 
 appFunction = AppFunction()
 csvOpener = CsvOpener()
 suggestedFunction = SuggestedFunction()
+scrapeFunction = ScrapeFunction()
+
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT']=0
 
     
 @app.route('/')
-def picture():
-    message = 'Welcome!'
-    return render_template('index.html',message=message)
+def landing():
+
+    return render_template('index.html')
 
 @app.route('/form')
 def my_form():
@@ -72,6 +75,10 @@ def suggested_form_post():
     qname = '_' + str(qname)
     return render_template('return_form.html',processed_size=processed_size,processed_text=processed_text,random=randomn,imdblinks=ilinks,wikilinks=wlinks,steamlinks=slinks,redditlinks=rlinks,twitterlinks=tlinks,youlinks=ylinks,twitchlinks = twlinks,trendlinks = trlinks,location=location, qname = qname)
 
+@app.route('/selentest')
+def testscrape():
+    test = scrapeFunction.scrapWebsite("acid", 'askdruniverse', 5)
+    
 
 if __name__ == "__main__":
     app.run(host="localhost", port=int("777"),debug=True,use_reloader=False)
