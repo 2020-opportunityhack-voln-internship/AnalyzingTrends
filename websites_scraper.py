@@ -7,7 +7,7 @@ import math
 import pandas as pd
 import os
 import time
-class ScraperFunction:
+class ScrapeFunction:
 
     def setup_chrome():
         chrome_options = Options()
