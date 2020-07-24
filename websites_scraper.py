@@ -30,7 +30,7 @@ class ScrapeFunction:
         return chrome_options
     # This functions scraps the website "https://askdruniverse.wsu.edu/"
     # csv file is saved as "query + "_" +  website_name" + .csv
-    def scrape_askdruniverse(search_query, website, website_link,chrome_options, total_link_results):
+    def scrape_askdruniverse(search_query, website, website_link,chrome_options, total_link_results,genType):
     
         # to get to the search element in the browser
         browser = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH") ,options=chrome_options)
@@ -45,7 +45,7 @@ class ScrapeFunction:
     
         df = pd.DataFrame(columns=['links'])
     
-        filename = search_query + '_' + website + '.csv'
+
     
         row_count = 0
     
@@ -58,18 +58,20 @@ class ScrapeFunction:
             row_count+=1
             if row_count == total_link_results:
                 break
-        df.to_csv(filename,index=False)
+
         search_query=search_query.replace(' ','_')
         if genType=='query':
             filename='static/linklists/query/querya.csv'
         if genType=='suggested':
             filename='static/linklists/suggested/'+str(search_query) + 'a.csv'
+        print(filename)
+        df.to_csv(filename,index=False)       
         browser.quit()
 
     
     # This functions scraps the website "https://www.teachengineering.org/k12engineering/what"
     # csv file is saved as "query + "_" +  website_name" + .csv
-    def scrape_teachengineering(search_query, website, website_link,chrome_options, total_link_results):
+    def scrape_teachengineering(search_query, website, website_link,chrome_options, total_link_results,genType):
     
         browser = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH"),options=chrome_options)
         browser.get(website_link)
