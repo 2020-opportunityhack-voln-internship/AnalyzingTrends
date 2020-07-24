@@ -78,7 +78,7 @@ def suggested_form_post():
 @app.route('/selentest')
 def testscrape():
     test = scrapeFunction.scrapWebsite("acid", 'askdruniverse', 5)
-    
+    return render_template('oldindex.html')
 
 if __name__ == "__main__":
     app.run(host="localhost", port=int("777"),debug=True,use_reloader=False)

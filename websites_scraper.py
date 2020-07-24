@@ -24,7 +24,7 @@ class ScrapeFunction:
         return chrome_options
     # This functions scraps the website "https://askdruniverse.wsu.edu/"
     # csv file is saved as "query + "_" +  website_name" + .csv
-    def scrape_askdruniverse(search_query, website, website_link,chrome_options, total_link_results):
+    def scrape_askdruniverse(self, search_query, website, website_link,chrome_options, total_link_results):
     
         # to get to the search element in the browser
         browser = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH"),options=chrome_options)
@@ -57,7 +57,7 @@ class ScrapeFunction:
     
     # This functions scraps the website "https://www.teachengineering.org/k12engineering/what"
     # csv file is saved as "query + "_" +  website_name" + .csv
-    def scrape_teachengineering(search_query, website, website_link,chrome_options, total_link_results):
+    def scrape_teachengineering(self, search_query, website, website_link,chrome_options, total_link_results):
     
         browser = webdriver.Chrome(executable_path = '/Users/muskansinghal/Desktop/chromedriver',options=chrome_options)
         browser.get(website_link)
@@ -119,7 +119,7 @@ class ScrapeFunction:
     # web scraper for two websites:
     # 1) https://askdruniverse.wsu.edu/
     # 2) https://www.teachengineering.org/k12engineering/what
-    def scrapWebsite(search_query, website, total_results):
+    def scrapWebsite(self, search_query, website, total_results):
     
         # do the initial set up, so that we don't see the browser being opened
         chrome_options = setup_chrome()
