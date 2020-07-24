@@ -6,6 +6,8 @@ from wikipediafunction import WikipediaFunction
 from youtubefunction import YoutubeFunction
 from steamfunction import SteamFunction
 from twitterfunction import TwitterFunction
+from Twitch import TwitchFunction
+from trendsfunction import TrendsFunction
 import time
 import datetime as dt
 from multiprocessing.pool import ThreadPool
@@ -22,7 +24,8 @@ class AppFunction:
         youtubeFunction = YoutubeFunction()
         steamFunction = SteamFunction()
         twitterFunction = TwitterFunction()
-        
+        twitchFunction = TwitchFunction()
+        trendsFunction = TrendsFunction()
         #-----------input string -----------#
         #q = input('Input Query: ')
         #size = int(input('Input how many items to find from each source: '))
@@ -39,10 +42,11 @@ class AppFunction:
         y = youtubeFunction.getYouTube(q, size)
         s = steamFunction.getSteam(q, size)
         t=[]
-        #ttuples = twitterFunction.getTwitter(q, size)
-        #for a_tuple in ttuples:
-            #t.append(a_tuple[0])
-            
+        ttuples = twitterFunction.getTwitter(q, size)
+        for a_tuple in ttuples:
+            t.append(a_tuple[0])
+        tw,tw_ids = twitchFunction.getTwitch(q, size)
+        tr = trendsFunction.getTrends(q, genType)
         #get thread running for reddit's output
         r = rThread.get()
         
@@ -56,7 +60,9 @@ class AppFunction:
         print(y)
         print(s)
         print(t)
-        mylist = r + i + w + y + s + t
+        print(tw)
+        print(tr)
+        mylist = r + i + w + y + s + t + tw + tr
         
         #----------- Output Links to CSV -----------#
         csvOutput.csvwrite(mylist, q, genType)
@@ -67,11 +73,15 @@ class AppFunction:
         #get Title, Cumulative Worldwide Box Office Gross, Rating, number of Ratings from IMDb
         idata = imdbFunction.getIMDBData(i)
         #get Twitter Likes for posts
-        #tdata = ttuples
+        tdata = ttuples
         #get Steam player data
         sdata = steamFunction.getSteamData(s)
+        #get Twitch data
+        twdata = twitchFunction.getTwitchData(tw_ids)
         #----------- Generate Graphs -----------#
         wikipediaFunction.getWikiGraph(wdata, q, genType)
         steamFunction.getSteamGraph(sdata, q, genType)
         imdbFunction.getIMDBGraph(idata, q, genType)
+        twitchFunction.getTwitchGraph(twdata, q, genType)
         return('Finished')
+    #app(0,'gravity',5,'query')

@@ -24,6 +24,7 @@
   <div class="nav">
     <div>
       <ul>
+        <li><a href="#trends">Google Trends</a></li>
         <li><a href="#wiki">Wikipedia</a></li>
         <li><a href="#imdb">IMDb</a></li>
         <li><a href="#steam">Steam</a></li>
@@ -31,7 +32,6 @@
         <li><a href="#twitter">Twitter</a></li>
         <li><a href="#twitch">Twitch</a></li>
         <li><a href="#youtube">YouTube</a></li>
-        <li><a href="#trends">Google Trends</a></li>
       </ul>
     </div>
     <div style="background-color: #303C6C; height:5px;"></div>
@@ -53,17 +53,35 @@
 </div>
 
 <div class="popculture">
-  <a name="wiki"></a>
+
+  <a name="trends"></a>
   <br> <br>
   <section id="accordion">
     <div>
       <input type="checkbox" id="check-1" />
       <!-- id needs to be enumerated, so the one before this is check-4 and the one after is check-6 -->
-      <label for="check-1">Wikipedia Info</label>
+      <label for="check-1">Google Trends Info</label>
       <article>
 
-        <img src="/static/images/query/wiki.png?{{random}}" alt="wikipedia1" width="30%" height="300">
-        <img src="/static/images/query/wiki1.png?{{random}}" alt="wikipedia2" width="30%" height="300">
+        <img src="/static/images{{location}}google{{qname}}.png?{{random}}" alt="Google Trends Graph" width="425" height="370">
+        <img src="/static/images{{location}}google1{{qname}}.png?{{random}}" alt="Google Trends Graph2" width="425" height="370">
+        <ul class="return">
+          {{trendlinks}}
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <a name="wiki"></a>
+  <br> <br>
+  <section id="accordion">
+    <div>
+      <input type="checkbox" id="check-2" />
+      <label for="check-2">Wikipedia Info</label>
+      <article>
+
+        <img src="/static/images{{location}}wiki{{qname}}.png?{{random}}" alt="wikipedia1" width="600" height="370">
+        <img src="/static/images{{location}}wiki1{{qname}}.png?{{random}}" alt="wikipedia2" width="600" height="370">
         <ul class="return">
           {{wikilinks}}
         </ul>
@@ -75,10 +93,10 @@
   <br> <br>
   <section id="accordion">
     <div>
-      <input type="checkbox" id="check-2" />
-      <label for="check-2">IMDb Info</label>
+      <input type="checkbox" id="check-3" />
+      <label for="check-3">IMDb Info</label>
       <article>
-        <img src="/static/images/query/imdb.png?{{random}}" alt="IMDb graph" width="30%">
+        <img src="/static/images{{location}}imdb{{qname}}.png?{{random}}" alt="IMDb graph" width="600" height="500">
         <ul class="return">
           {{imdblinks}}
         </ul>
@@ -90,10 +108,10 @@
   <br> <br>
   <section id="accordion">
     <div>
-      <input type="checkbox" id="check-3" />
-      <label for="check-3">Steam Info</label>
+      <input type="checkbox" id="check-4" />
+      <label for="check-4">Steam Info</label>
       <article>
-        <img src="/static/images/query/steam.png?{{random}}" alt="Steam graph" width="30%" height="300">
+        <img src="/static/images{{location}}steam{{qname}}.png?{{random}}" alt="Steam graph" width="600" height="400">
 
         <ul class="return">
           {{steamlinks}}
@@ -107,8 +125,8 @@
   <br> <br>
   <section id="accordion">
     <div>
-      <input type="checkbox" id="check-4" />
-      <label for="check-4">Reddit Info</label>
+      <input type="checkbox" id="check-5" />
+      <label for="check-5">Reddit Info</label>
       <article>
         <ul class="return">
           {{redditlinks}}
@@ -121,8 +139,8 @@
   <br> <br>
   <section id="accordion">
     <div>
-      <input type="checkbox" id="check-5" />
-      <label for="check-5">Twitter Info</label>
+      <input type="checkbox" id="check-6" />
+      <label for="check-6">Twitter Info</label>
       <article>
         <ul class="return">
           {{twitterlinks}}
@@ -135,11 +153,12 @@
   <br> <br>
   <section id="accordion">
     <div>
-      <input type="checkbox" id="check-6" />
-      <label for="check-6">Twitch Info</label>
+      <input type="checkbox" id="check-7" />
+      <label for="check-7">Twitch Info</label>
       <article>
+	<img src="/static/images{{location}}twitch{{qname}}.png?{{random}}" alt="Twitch graph" width="600" height = "400">
         <ul class="return">
-
+	{{twitchlinks}}
         </ul>
       </article>
     </div>
@@ -149,8 +168,8 @@
   <br> <br>
   <section id="accordion">
     <div>
-      <input type="checkbox" id="check-7" />
-      <label for="check-7">YouTube Info</label>
+      <input type="checkbox" id="check-8" />
+      <label for="check-8">YouTube Info</label>
       <article>
         <ul class="return">
           {{youlinks}}
@@ -159,7 +178,7 @@
     </div>
   </section>
 </div>
-<a name="trends"></a>
+
 <br> <br>
 
 <a name="curriculum"></a>

@@ -17,23 +17,20 @@ class YoutubeFunction :
             html_encoding = EncodingDetector.find_declared_encoding(resp.content, is_html=True)
             encoding = html_encoding or http_encoding
             soup = BeautifulSoup(resp.content, from_encoding=encoding,features="lxml")
-
             ytLinkList = []
             print(url)
-            ugly = soup.find_all('script')
-            for script in ugly:
-                if 'videoId' in script.text:
-                    myscript = script.text
-                    videoIDs = re.findall('watch\?v\=(\w+)',myscript)
-                    for video in videoIDs:
-                        link = 'https://www.youtube.com/watch?v='+str(video)
-                        if len(link) == 43:
-                            ytLinkList.append(link)
-
+            
+            ugly = str(soup.find_all('script'))
+            videoIDs = re.findall('watch\?v\=(\w+)',ugly)
+            for video in videoIDs:
+                link = 'https://www.youtube.com/watch?v='+str(video)
+                if len(link) == 43:
+                    ytLinkList.append(link) 
+            
             return ytLinkList[:size]
 
 
-#test = YoutubeFunction.getYouTube(0, 'gravity', 10)
+#test = YoutubeFunction.getYouTube(0, 'electron', 5)
 #print(test)
  
 

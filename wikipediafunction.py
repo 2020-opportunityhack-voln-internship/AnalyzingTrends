@@ -72,6 +72,18 @@ class WikipediaFunction :
             newdict[pagetitle] = values
         #make .png filename match query
         filename = q.replace(" ","_")
+        formatdates=[]
+        try:
+            for i in newdict['Date']:
+                year = str(i[0:4])
+                month_number = i[4:6]
+                month = str(datetime.strptime(month_number, "%m").strftime("%B"))
+                date = month + ' ' + year
+                formatdates.append(date)
+            print(formatdates)
+            newdict['Date']=formatdates
+        except:
+            print('Failed to convert date')
         #convert dictionary to pandas dataframe
         df = pd.DataFrame.from_dict(newdict)
         #make date index column, better for graphing
@@ -91,11 +103,12 @@ class WikipediaFunction :
         plt.legend(bbox_to_anchor=(.9,.75),
                    bbox_transform=plt.gcf().transFigure)
         if genType=='suggested':
-            plt.savefig('static/images/suggested/wiki_' + str(filename)+'1.png',bbox_inches='tight')
+            plt.savefig('static/images/suggested/wiki1_' + str(filename)+'.png',bbox_inches='tight')
         elif genType=='query':
             plt.savefig('static/images/query/wiki1.png',bbox_inches='tight')
             
         plt.show()
-# w = WikipediaFunction.getWiki(0, 'space',5)
-# wdata = WikipediaFunction.getWikiData(0,w)
-# WikipediaFunction.getWikiGraph(0,wdata,'space')
+        
+#w = WikipediaFunction.getWiki(0, 'space',5)
+#wdata = WikipediaFunction.getWikiData(0,w)
+#WikipediaFunction.getWikiGraph(0,wdata,'space','query')

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+
+<body>
+    <link rel="stylesheet" href="/static/style.css">
+    <form id="postForm" method="POST">
+        <label for="topic">Choose a topic:</label>
+        <select id="topic" name = "topic" required>
+        {{suggested_topics}}
+        </select>
+        <input type="submit" name = "topic">
+        
+    </form>
+    <div id="loading" class="loader"></div>
+
+    <!-- the result of the search will be rendered inside this div -->
+    <div id="result"></div>
+    <script>
+  
+        // Submission handler for 'postForm'
+        $("#postForm").submit(function (event) {
+
+            // Override normal submission so we can use ajax on it
+            event.preventDefault();
+
+            // show loading icon before intensive backend process
+            $('#loading').show();
+            
+            // Get form values
+            var $form = $(this),
+                qWord = $(this).children("option:selected").val();
+
+                // important for some reason
+                url = $form.attr( 'action' );
+            
+
+            // Post data
+            var posting = $.post(url,{topic=qWord});
+
+            // Place returned HTML page in div 'result'
+            posting.done(function (data) {
+                $("#result").empty().append(data);
+                // hide loading icon after process completes
+                $('#loading').hide();
+            });
+        });
+
+    </script>
+</body>
+
+</html>

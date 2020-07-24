@@ -1,6 +1,10 @@
 bs4
-twitterscraper == 1.4.0
 gunicorn
 flask
 pandas
 matplotlib
+requests
+coala-utils~=0.5.0
+lxml
+billiard
+pytrends

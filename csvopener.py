@@ -4,11 +4,12 @@ import csv
 class CsvOpener:
 
     def CsvOpen(self,genType,q) :
-        q = q.replace(' ','-')
+        q = q.replace(' ','_')
         if genType == 'query':
             file = 'query/query.csv'
         elif genType == 'suggested':
             file = 'suggested/'+str(q) +'.csv'
+
         
         rlinks=""
         tlinks=""
@@ -16,6 +17,8 @@ class CsvOpener:
         wlinks=""
         ylinks=""
         ilinks=""
+        twlinks=""
+        trlinks=""
         
         with open('static/linklists/'+str(file), newline='') as csvfile:
             links = list(csv.reader(csvfile, delimiter = ','))[0]
@@ -33,8 +36,11 @@ class CsvOpener:
                     ylinks = ylinks + str(link)
                 if 'imdb.com' in link:
                     ilinks = ilinks + str(link)
-        
-        return rlinks,tlinks,slinks,wlinks,ylinks,ilinks
+                if 'twitch.tv' in link:
+                    twlinks = twlinks + str(link)
+                if 'trends.google.com' in link:
+                    trlinks = trlinks + str(link)
+        return rlinks,tlinks,slinks,wlinks,ylinks,ilinks,twlinks, trlinks
         
 #linkinfo = CsvOpener.CsvOpen(0,'query','gravity')
 #ilinkstest = linkinfo[5]
