@@ -89,7 +89,7 @@ class AppFunction:
     
     
         #------Get Curriculum--------#
-        scrapeFunction.scrapWebsite(0,q, 'askdruniverse', 5,genType)
-        scrapeFunction.scrapWebsite(0,q, 'teachengineering', 5,genType)
+        scrapeFunction.scrapWebsite(q, 'askdruniverse', size,genType)
+        scrapeFunction.scrapWebsite(q, 'teachengineering', size,genType)
     
     #app(0,'gravity',5,'query')
