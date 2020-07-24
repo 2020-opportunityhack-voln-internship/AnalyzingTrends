@@ -59,7 +59,13 @@ class ScrapeFunction:
             if row_count == total_link_results:
                 break
         df.to_csv(filename,index=False)
+        search_query=search_query.replace(' ','_')
+        if genType=='query':
+            filename='static/linklists/query/querya.csv'
+        if genType=='suggested':
+            filename='static/linklists/suggested/'+str(search_query) + 'a.csv'
         browser.quit()
+
     
     # This functions scraps the website "https://www.teachengineering.org/k12engineering/what"
     # csv file is saved as "query + "_" +  website_name" + .csv
@@ -118,24 +124,28 @@ class ScrapeFunction:
             centernav = links[0].find_elements_by_class_name('text-center')[0]
             li = centernav.find_elements_by_tag_name('li')
             li[3].find_elements_by_tag_name('a')[0].click()
-    
+        search_query=search_query.replace(' ','_')
+        if genType=='query':
+            filename='static/linklists/query/queryt.csv'
+        if genType=='suggested':
+            filename='static/linklists/suggested/'+str(search_query) + 't.csv'
         df.to_csv(filename,index=False)
         browser.quit()
     
     # web scraper for two websites:
     # 1) https://askdruniverse.wsu.edu/
     # 2) https://www.teachengineering.org/k12engineering/what
-    def scrapWebsite(self, search_query, website, total_results):
+    def scrapWebsite(self, search_query, website, total_results, genType):
     
         # do the initial set up, so that we don't see the browser being opened
         chrome_options = ScrapeFunction.setup_chrome()
     
         if website == 'askdruniverse':
             website_link = 'https://askdruniverse.wsu.edu/'
-            ScrapeFunction.scrape_askdruniverse(search_query, website, website_link, chrome_options, total_results)
+            ScrapeFunction.scrape_askdruniverse(search_query, website, website_link, chrome_options, total_results, genType)
         if website == 'teachengineering':
             website_link = 'https://www.teachengineering.org/k12engineering/what'
-            ScrapeFunction.scrape_teachengineering(search_query, website, website_link, chrome_options, total_results)
+            ScrapeFunction.scrape_teachengineering(search_query, website, website_link, chrome_options, total_results,genType)
 
-#test = ScrapeFunction.scrapWebsite(0,"acid", 'askdruniverse', 5)
+#test = ScrapeFunction.scrapWebsite(0,"acid", 'askdruniverse', 5,'query')
 

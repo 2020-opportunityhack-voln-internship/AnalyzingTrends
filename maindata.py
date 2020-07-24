@@ -11,6 +11,7 @@ from trendsfunction import TrendsFunction
 import time
 import datetime as dt
 from multiprocessing.pool import ThreadPool
+from websites_scraper import ScrapeFunction
 
 class AppFunction:
     def app(self, q,size,genType):
@@ -26,6 +27,7 @@ class AppFunction:
         twitterFunction = TwitterFunction()
         twitchFunction = TwitchFunction()
         trendsFunction = TrendsFunction()
+        scrapeFunction = ScrapeFunction()
         #-----------input string -----------#
         #q = input('Input Query: ')
         #size = int(input('Input how many items to find from each source: '))
@@ -84,4 +86,10 @@ class AppFunction:
         imdbFunction.getIMDBGraph(idata, q, genType)
         twitchFunction.getTwitchGraph(twdata, q, genType)
         return('Finished')
+    
+    
+        #------Get Curriculum--------#
+        scrapeFunction.scrapWebsite(0,q, 'askdruniverse', 5,genType)
+        scrapeFunction.scrapWebsite(0,q, 'teachengineering', 5,genType)
+    
     #app(0,'gravity',5,'query')

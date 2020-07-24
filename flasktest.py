@@ -4,12 +4,12 @@ from maindata import AppFunction
 from random import random
 from csvopener import CsvOpener
 from suggested import SuggestedFunction
-from websites_scraper import ScrapeFunction
+
 
 appFunction = AppFunction()
 csvOpener = CsvOpener()
 suggestedFunction = SuggestedFunction()
-scrapeFunction = ScrapeFunction()
+
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT']=0
@@ -43,9 +43,12 @@ def my_form_post():
     ilinks = Markup(linkinfo[5])
     twlinks = Markup(linkinfo[6])
     trlinks = Markup(linkinfo[7])
+    telinks = Markup(linkinfo[8])
+    alinks = Markup(linkinfo[9])
+
     location = '/query/'
     qname = ""
-    return render_template('return_form.html',processed_size=processed_size,processed_text=processed_text,random=randomn,imdblinks=ilinks,wikilinks=wlinks,steamlinks=slinks,redditlinks=rlinks,twitterlinks=tlinks,youlinks=ylinks,twitchlinks = twlinks,trendlinks = trlinks,location = location, qname = qname)
+    return render_template('return_form.html',processed_size=processed_size,processed_text=processed_text,random=randomn,imdblinks=ilinks,wikilinks=wlinks,steamlinks=slinks,redditlinks=rlinks,twitterlinks=tlinks,youlinks=ylinks,twitchlinks = twlinks,trendlinks = trlinks,location = location, qname = qname, telinks = telinks, alinks = alinks)
 
 @app.route('/suggested')
 def suggested_form():
