@@ -55,6 +55,12 @@ class AppFunction:
         #toc = time.perf_counter()
         #print(f"did the thing in {toc - tic:0.4f} seconds")
         
+        #------Get Curriculum--------#
+        scrapeFunction.scrapWebsite(q, 'askdruniverse', size,genType)
+        print('askdruniverse')
+        scrapeFunction.scrapWebsite(q, 'teachengineering', size,genType)
+        print('teachengineering')
+        
         #URL lists
         print(r)
         print(i)
@@ -88,8 +94,6 @@ class AppFunction:
         return('Finished')
     
     
-        #------Get Curriculum--------#
-        scrapeFunction.scrapWebsite(q, 'askdruniverse', size,genType)
-        scrapeFunction.scrapWebsite(q, 'teachengineering', size,genType)
+
     
     #app(0,'gravity',5,'query')
