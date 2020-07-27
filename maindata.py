@@ -15,7 +15,7 @@ from websites_scraper import ScrapeFunction
 
 class AppFunction:
     def app(self, q,size,genType):
-        pool = ThreadPool(processes=1)
+        pool = ThreadPool(processes=3)
         
         #----------- Initialize Class Objects -----------#
         redditFunction = RedditFunction()
@@ -28,16 +28,17 @@ class AppFunction:
         twitchFunction = TwitchFunction()
         trendsFunction = TrendsFunction()
         scrapeFunction = ScrapeFunction()
-        #-----------input string -----------#
-        #q = input('Input Query: ')
-        #size = int(input('Input how many items to find from each source: '))
-        
+
+
         #tic = time.perf_counter()
         
         #----------- Call Link Fetch Functions -----------#
         #Run reddit in seperate thread to reduce execution time
         rThread = pool.apply_async(redditFunction.getPushshiftData, (100, (dt.date.today() - dt.timedelta(days = (731))),(dt.date.today()), q, size))
+        #------Start Curriculum Threads--------#
+        aThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'askdruniverse', size,genType))
         
+        teThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'teachengineering', size,genType))
         #get URLs from IMDb, Wikipedia, Youtube, Steam, and Twitter
         i = imdbFunction.getIMDB(q, size)
         w = wikipediaFunction.getWiki(q, size)
@@ -56,12 +57,7 @@ class AppFunction:
         #print(f"did the thing in {toc - tic:0.4f} seconds")
         
         
-        #------Get Curriculum--------#
-        aThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'askdruniverse', size,genType))
-        print('finished askdruniverse')
-        te = scrapeFunction.scrapWebsite(q, 'teachengineering', size,genType)
-        print('finished teachengineering')
-        a = aThread.get()
+
         #URL lists
         print(r)
         print(i)
@@ -71,12 +67,8 @@ class AppFunction:
         print(t)
         print(tw)
         print(tr)
-        print(te)
-        print(a)
-        mylist = r + i + w + y + s + t + tw + tr + te + a
-        
-        #----------- Output Links to CSV -----------#
-        csvOutput.csvwrite(mylist, q, genType)
+
+ 
         
         #----------- Get Link Data -----------#
         #get pageview data from Wikipedia
@@ -89,6 +81,22 @@ class AppFunction:
         sdata = steamFunction.getSteamData(s)
         #get Twitch data
         twdata = twitchFunction.getTwitchData(tw_ids)
+        
+        
+        #-------- Get Curriculum Threads -----------#
+        a = aThread.get()
+        print('finished askdruniverse')
+        te = teThread.get()
+        print('finished teachengineering')  
+        
+        print(te)
+        print(a)
+        
+        #----------- Merge URL lists-----------#
+        mylist = r + i + w + y + s + t + tw + tr + te + a
+        
+        #----------- Output Links to CSV -----------#
+        csvOutput.csvwrite(mylist, q, genType)
         #----------- Generate Graphs -----------#
         wikipediaFunction.getWikiGraph(wdata, q, genType)
         steamFunction.getSteamGraph(sdata, q, genType)
