@@ -78,10 +78,10 @@ class ScrapeFunction:
     
         # to get to the search element in the browser
         # and send the query to the search element
-        time.sleep(2)
-        search_element = browser.find_element_by_name("q")
-        search_element.send_keys(search_query)
-        search_element.send_keys(Keys.RETURN)
+        # time.sleep(2)
+        # search_element = browser.find_element_by_name("q")
+        # search_element.send_keys(search_query)
+        # search_element.send_keys(Keys.RETURN)
     
     
         # to get access to the number of results that is spread
@@ -146,7 +146,8 @@ class ScrapeFunction:
             website_link = 'https://askdruniverse.wsu.edu/'
             ScrapeFunction.scrape_askdruniverse(search_query, website, website_link, chrome_options, total_results, genType)
         if website == 'teachengineering':
-            website_link = 'https://www.teachengineering.org/k12engineering/what'
+            q = search_query.replace(' ','+')
+            website_link = 'https://www.teachengineering.org/curriculum/browse?q=' + str(q)
             ScrapeFunction.scrape_teachengineering(search_query, website, website_link, chrome_options, total_results,genType)
 
 #test = ScrapeFunction.scrapWebsite(0,"acid", 'askdruniverse', 5,'query')
