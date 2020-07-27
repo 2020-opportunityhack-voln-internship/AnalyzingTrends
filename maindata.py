@@ -57,9 +57,9 @@ class AppFunction:
         
         #------Get Curriculum--------#
         te = scrapeFunction.scrapWebsite(q, 'askdruniverse', size,genType)
-        print('askdruniverse')
+        print('finished askdruniverse')
         a = scrapeFunction.scrapWebsite(q, 'teachengineering', size,genType)
-        print('teachengineering')
+        print('finished teachengineering')
         
         #URL lists
         print(r)
@@ -70,6 +70,8 @@ class AppFunction:
         print(t)
         print(tw)
         print(tr)
+        print(te)
+        print(a)
         mylist = r + i + w + y + s + t + tw + tr + te + a
         
         #----------- Output Links to CSV -----------#
