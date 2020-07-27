@@ -100,7 +100,7 @@ class ScrapeFunction:
         number_of_pages = math.ceil(float(total_results)/10)
     
         df = pd.DataFrame(columns=['links'])
-        filename = search_query + '_' + website + '.csv'
+        #filename = search_query + '_' + website + '.csv'
         row_count=0
         links_list = []
     
@@ -150,11 +150,11 @@ class ScrapeFunction:
             q = search_query.replace(' ','+')
             website_link = 'https://www.askdruniverse.wsu.edu/?s='+ str(q)
             #website_link = 'https://askdruniverse.wsu.edu/'
-            ScrapeFunction.scrape_askdruniverse(search_query, website, website_link, chrome_options, total_results, genType)
+            result = ScrapeFunction.scrape_askdruniverse(search_query, website, website_link, chrome_options, total_results, genType)
         if website == 'teachengineering':
             q = search_query.replace(' ','+')
             website_link = 'https://www.teachengineering.org/curriculum/browse?q=' + str(q)
-            ScrapeFunction.scrape_teachengineering(search_query, website, website_link, chrome_options, total_results,genType)
-
+            result = ScrapeFunction.scrape_teachengineering(search_query, website, website_link, chrome_options, total_results,genType)
+        return result
 #test = ScrapeFunction.scrapWebsite(0,"acid", 'askdruniverse', 5,'query')
 
