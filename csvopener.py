@@ -19,6 +19,8 @@ class CsvOpener:
         ilinks=""
         twlinks=""
         trlinks=""
+        telinks=""
+        alinks=""
         
         with open('static/linklists/'+str(file), newline='') as csvfile:
             links = list(csv.reader(csvfile, delimiter = ','))[0]
@@ -40,41 +42,11 @@ class CsvOpener:
                     twlinks = twlinks + str(link)
                 if 'trends.google.com' in link:
                     trlinks = trlinks + str(link)
-                    
-                    
-        q = q.replace(' ','_')
-        if genType == 'query':
-            file = 'query/queryt.csv'
-        elif genType == 'suggested':
-            file = 'suggested/'+str(q) +'t.csv'    
-            
-        telinks = ""
+                if 'teachengineering' in link:
+                    telinks = telinks + str(link)
+                if 'askdruniverse' in link:
+                    alinks = alinks + str(link)
 
-        with open('static/linklists/'+str(file), newline='') as csvfile:
-            links = list(csv.reader(csvfile, delimiter = ','))[0]
-            for link in links:
-                link = '<li><a href="'+str(link)+'" target="_blank">'+str(link)+'</a></li>'
-                telinks = telinks + str(link)
-            
-        
-
-        
-        q = q.replace(' ','_')
-        if genType == 'query':
-            file = 'query/querya.csv'
-        elif genType == 'suggested':
-            file = 'suggested/'+str(q) +'a.csv'  
-            
-        alinks = ""
-        
-        with open('static/linklists/'+str(file), newline='') as csvfile:
-            links = list(csv.reader(csvfile, delimiter = ','))[0]
-            for link in links:
-                link = '<li><a href="'+str(link)+'" target="_blank">'+str(link)+'</a></li>'
-                alinks = alinks + str(link)            
-            
-                    
-        
         return rlinks,tlinks,slinks,wlinks,ylinks,ilinks,twlinks, trlinks, telinks, alinks
         
 #linkinfo = CsvOpener.CsvOpen(0,'query','gravity')

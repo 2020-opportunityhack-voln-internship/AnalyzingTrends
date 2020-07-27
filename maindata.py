@@ -56,9 +56,9 @@ class AppFunction:
         #print(f"did the thing in {toc - tic:0.4f} seconds")
         
         #------Get Curriculum--------#
-        scrapeFunction.scrapWebsite(q, 'askdruniverse', size,genType)
+        te = scrapeFunction.scrapWebsite(q, 'askdruniverse', size,genType)
         print('askdruniverse')
-        scrapeFunction.scrapWebsite(q, 'teachengineering', size,genType)
+        a = scrapeFunction.scrapWebsite(q, 'teachengineering', size,genType)
         print('teachengineering')
         
         #URL lists
@@ -70,7 +70,7 @@ class AppFunction:
         print(t)
         print(tw)
         print(tr)
-        mylist = r + i + w + y + s + t + tw + tr
+        mylist = r + i + w + y + s + t + tw + tr + te + a
         
         #----------- Output Links to CSV -----------#
         csvOutput.csvwrite(mylist, q, genType)

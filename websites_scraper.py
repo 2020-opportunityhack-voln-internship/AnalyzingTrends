@@ -59,14 +59,16 @@ class ScrapeFunction:
             if row_count == total_link_results:
                 break
 
-        search_query=search_query.replace(' ','_')
-        if genType=='query':
-            filename='static/linklists/query/querya.csv'
-        if genType=='suggested':
-            filename='static/linklists/suggested/'+str(search_query) + 'a.csv'
-        print(filename)
-        df.to_csv(filename,index=False)       
+        # search_query=search_query.replace(' ','_')
+        # if genType=='query':
+        #     filename='static/linklists/query/querya.csv'
+        # if genType=='suggested':
+        #     filename='static/linklists/suggested/'+str(search_query) + 'a.csv'
+        # print(filename)
+        # df.to_csv(filename,index=False)       
+        linkstest = df['links'].tolist()
         browser.quit()
+        return linkstest
 
     
     # This functions scraps the website "https://www.teachengineering.org/k12engineering/what"
@@ -126,13 +128,15 @@ class ScrapeFunction:
             centernav = links[0].find_elements_by_class_name('text-center')[0]
             li = centernav.find_elements_by_tag_name('li')
             li[3].find_elements_by_tag_name('a')[0].click()
-        search_query=search_query.replace(' ','_')
-        if genType=='query':
-            filename='static/linklists/query/queryt.csv'
-        if genType=='suggested':
-            filename='static/linklists/suggested/'+str(search_query) + 't.csv'
-        df.to_csv(filename,index=False)
+        # search_query=search_query.replace(' ','_')
+        # if genType=='query':
+        #     filename='static/linklists/query/queryt.csv'
+        # if genType=='suggested':
+        #     filename='static/linklists/suggested/'+str(search_query) + 't.csv'
+        #df.to_csv(filename,index=False)
+        linkstest = df['links'].tolist()
         browser.quit()
+        return linkstest
     
     # web scraper for two websites:
     # 1) https://askdruniverse.wsu.edu/
