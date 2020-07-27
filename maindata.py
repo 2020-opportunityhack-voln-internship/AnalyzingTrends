@@ -55,12 +55,13 @@ class AppFunction:
         #toc = time.perf_counter()
         #print(f"did the thing in {toc - tic:0.4f} seconds")
         
-        #------Get Curriculum--------#
-        te = scrapeFunction.scrapWebsite(q, 'askdruniverse', size,genType)
-        print('finished askdruniverse')
-        a = scrapeFunction.scrapWebsite(q, 'teachengineering', size,genType)
-        print('finished teachengineering')
         
+        #------Get Curriculum--------#
+        aThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'askdruniverse', size,genType))
+        print('finished askdruniverse')
+        te = scrapeFunction.scrapWebsite(q, 'teachengineering', size,genType)
+        print('finished teachengineering')
+        a = aThread.get()
         #URL lists
         print(r)
         print(i)
