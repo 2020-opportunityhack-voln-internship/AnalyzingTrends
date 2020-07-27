@@ -35,13 +35,13 @@ class ScrapeFunction:
         # to get to the search element in the browser
         browser = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH") ,options=chrome_options)
         browser.get(website_link)
-        search_element = browser.find_element_by_id("site-header-widgets-open").click()
-        time.sleep(2)
-        search_element = browser.find_element_by_name("s")
+        # search_element = browser.find_element_by_id("site-header-widgets-open").click()
+        # time.sleep(2)
+        # search_element = browser.find_element_by_name("s")
     
         # send the query to the search element
-        search_element.send_keys(search_query)
-        search_element.send_keys(Keys.RETURN)
+        # search_element.send_keys(search_query)
+        # search_element.send_keys(Keys.RETURN)
     
         df = pd.DataFrame(columns=['links'])
     
@@ -143,7 +143,9 @@ class ScrapeFunction:
         chrome_options = ScrapeFunction.setup_chrome()
     
         if website == 'askdruniverse':
-            website_link = 'https://askdruniverse.wsu.edu/'
+            q = search_query.replace(' ','+')
+            website_link = 'https://www.askdruniverse.wsu.edu/?s='+ str(q)
+            #website_link = 'https://askdruniverse.wsu.edu/'
             ScrapeFunction.scrape_askdruniverse(search_query, website, website_link, chrome_options, total_results, genType)
         if website == 'teachengineering':
             q = search_query.replace(' ','+')
