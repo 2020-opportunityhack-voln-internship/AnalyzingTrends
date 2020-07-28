@@ -16,7 +16,7 @@ from webscraper import NasaFunction
 
 class AppFunction:
     def app(self, q,size,genType):
-        pool = ThreadPool(processes=3)
+        pool = ThreadPool(processes=4)
         
         #----------- Initialize Class Objects -----------#
         redditFunction = RedditFunction()
