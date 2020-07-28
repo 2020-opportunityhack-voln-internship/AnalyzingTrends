@@ -44,12 +44,16 @@ class AppFunction:
         #get URLs from IMDb, Wikipedia, Youtube, Steam, and Twitter
         i = imdbFunction.getIMDB(q, size)
         print('got imdb')
+        iThread = pool.apply_async(imdbFunction.getIMDBData, (i))
+        print('started imdbthread')
         w = wikipediaFunction.getWiki(q, size)
         print('got wikipedia')
         y = youtubeFunction.getYouTube(q, size)
         print('got youtube')
         s = steamFunction.getSteam(q, size)
         print('got steam')
+        r = rThread.get()
+        print('got reddit')
         t=[]
         ttuples = twitterFunction.getTwitter(q, size)
         print('got twitter')
@@ -57,13 +61,16 @@ class AppFunction:
             t.append(a_tuple[0])
         tw,tw_ids = twitchFunction.getTwitch(q, size)
         print('got twitch')
-        r = rThread.get()
-        print('got reddit')
         tr = trendsFunction.getTrends(q, genType)
         print('got trends')
         n = nasaFunction.NasaScraper(q, size)
         print('got nasa')
-        #get thread running for reddit's output
+        
+        #-------- Get Curriculum Threads -----------#
+        a = aThread.get()
+        print('got askdruniverse')
+        te = teThread.get()
+        print('got teachengineering')  
 
         
         #toc = time.perf_counter()
@@ -81,14 +88,17 @@ class AppFunction:
         print(tw)
         print(tr)
         print(n)
- 
+        print(te)
+        print(a)
+        
         print('starting data')
         #----------- Get Link Data -----------#
         #get pageview data from Wikipedia
         wdata = wikipediaFunction.getWikiData(w)
         print('got wiki data')
         #get Title, Cumulative Worldwide Box Office Gross, Rating, number of Ratings from IMDb
-        idata = imdbFunction.getIMDBData(i)
+        idata = iThread.get()
+        #idata = imdbFunction.getIMDBData(i)
         print('got imdb data')
         #get Twitter Likes for posts
         tdata = ttuples
@@ -100,14 +110,9 @@ class AppFunction:
         twdata = twitchFunction.getTwitchData(tw_ids)
         print('got twitch data')
         
-        #-------- Get Curriculum Threads -----------#
-        a = aThread.get()
-        print('got askdruniverse')
-        te = teThread.get()
-        print('got teachengineering')  
+
         
-        print(te)
-        print(a)
+
         
         #----------- Merge URL lists-----------#
         mylist = r + i + w + y + s + t + tw + tr + te + a + n
