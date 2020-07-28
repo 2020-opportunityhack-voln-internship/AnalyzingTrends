@@ -33,28 +33,36 @@ class AppFunction:
 
 
         #tic = time.perf_counter()
-        
+        print('starting')
         #----------- Call Link Fetch Functions -----------#
         #Run reddit in seperate thread to reduce execution time
         rThread = pool.apply_async(redditFunction.getPushshiftData, (100, (dt.date.today() - dt.timedelta(days = (731))),(dt.date.today()), q, size, genType))
         #------Start Curriculum Threads--------#
         aThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'askdruniverse', size,genType))
         teThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'teachengineering', size,genType))
-        
+        print('started initial threads')
         #get URLs from IMDb, Wikipedia, Youtube, Steam, and Twitter
         i = imdbFunction.getIMDB(q, size)
+        print('got imdb')
         w = wikipediaFunction.getWiki(q, size)
+        print('got wikipedia')
         y = youtubeFunction.getYouTube(q, size)
+        print('got youtube')
         s = steamFunction.getSteam(q, size)
         t=[]
         ttuples = twitterFunction.getTwitter(q, size)
+        print('got twitter')
         for a_tuple in ttuples:
             t.append(a_tuple[0])
         tw,tw_ids = twitchFunction.getTwitch(q, size)
+        print('got twitch')
         tr = trendsFunction.getTrends(q, genType)
+        print('got trends')
         n = nasaFunction.NasaScraper(q, size)
+        print('got nasa')
         #get thread running for reddit's output
         r = rThread.get()
+        print('got reddit')
         
         #toc = time.perf_counter()
         #print(f"did the thing in {toc - tic:0.4f} seconds")
@@ -72,7 +80,7 @@ class AppFunction:
         print(tr)
         print(n)
  
-        
+        print('starting data')
         #----------- Get Link Data -----------#
         #get pageview data from Wikipedia
         wdata = wikipediaFunction.getWikiData(w)
@@ -84,7 +92,7 @@ class AppFunction:
         sdata = steamFunction.getSteamData(s)
         #get Twitch data
         twdata = twitchFunction.getTwitchData(tw_ids)
-
+        print('got data')
         
         #-------- Get Curriculum Threads -----------#
         a = aThread.get()
