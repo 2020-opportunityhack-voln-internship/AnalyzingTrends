@@ -44,7 +44,7 @@ class AppFunction:
         #get URLs from IMDb, Wikipedia, Youtube, Steam, and Twitter
         i = imdbFunction.getIMDB(q, size)
         print('got imdb')
-        iThread = pool.apply_async(imdbFunction.getIMDBData, (i))
+        iThread = pool.apply_async(imdbFunction.getIMDBData, (i, 'dummy'))
         print('started imdbthread')
         w = wikipediaFunction.getWiki(q, size)
         print('got wikipedia')
