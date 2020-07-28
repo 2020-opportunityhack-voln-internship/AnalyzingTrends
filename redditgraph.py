@@ -108,9 +108,9 @@ class RedditFunction :
         
         return fulllinks[:size]
     
-tic = time.perf_counter()
-test = RedditFunction.getPushshiftData(0, 100 ,1526428800,1589587200, 'gravity', 10, 'query')
-toc = time.perf_counter()
-print(f"did the thing in {toc - tic:0.4f} seconds")
+#tic = time.perf_counter()
+#test = RedditFunction.getPushshiftData(0, 100 ,1526428800,1589587200, 'gravity', 10, 'query')
+#toc = time.perf_counter()
+#print(f"did the thing in {toc - tic:0.4f} seconds")
 
 # print(test)
