@@ -2,7 +2,7 @@ import json
 import requests
 from datetime import datetime
 import matplotlib.pyplot as plt
-#import time
+import time
 import statistics
 
 
@@ -83,14 +83,17 @@ class RedditFunction :
         for month in rel_data_grouped:
             final_data[month]=statistics.mean(rel_data_grouped[month])
 
-
-
+        newfinal_data={}
+        for date in final_data.keys():
+            newdate = datetime.strptime(date,'%Y-%m')
+            newfinal_data[newdate]=final_data[date]
+        print(newfinal_data)
         #current_time = datetime.datetime.now()
         #current_time_utc = datetime.utc()
         #print(current_time, current_time_utc)
         #print(p[0],p[2])
-
-        plt.plot(list(final_data.keys()), list(final_data.values()),color='crimson', label = q)
+        
+        plt.plot(list(newfinal_data.keys()), list(newfinal_data.values()),color='crimson', label = q)
         plt.ylabel('popularity')
         plt.xlabel('time')
         plt.yscale('log')
@@ -105,9 +108,9 @@ class RedditFunction :
         
         return fulllinks[:size]
     
-# tic = time.perf_counter()
-#test = RedditFunction.getPushshiftData(0, 100 ,1526428800,1589587200, 'gravity', 10, 'query')
-# toc = time.perf_counter()
-# print(f"did the thing in {toc - tic:0.4f} seconds")
+tic = time.perf_counter()
+test = RedditFunction.getPushshiftData(0, 100 ,1526428800,1589587200, 'gravity', 10, 'query')
+toc = time.perf_counter()
+print(f"did the thing in {toc - tic:0.4f} seconds")
 
 # print(test)
