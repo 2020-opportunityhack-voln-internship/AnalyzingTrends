@@ -19,6 +19,9 @@ class CsvOpener:
         ilinks=""
         twlinks=""
         trlinks=""
+        telinks=""
+        alinks=""
+        nlinks=""
         
         with open('static/linklists/'+str(file), newline='') as csvfile:
             links = list(csv.reader(csvfile, delimiter = ','))[0]
@@ -40,7 +43,14 @@ class CsvOpener:
                     twlinks = twlinks + str(link)
                 if 'trends.google.com' in link:
                     trlinks = trlinks + str(link)
-        return rlinks,tlinks,slinks,wlinks,ylinks,ilinks,twlinks, trlinks
+                if 'teachengineering' in link:
+                    telinks = telinks + str(link)
+                if 'askdruniverse' in link:
+                    alinks = alinks + str(link)
+                if 'nasa.gov' in link:
+                    nlinks = nlinks + str(link)
+            
+        return rlinks,tlinks,slinks,wlinks,ylinks,ilinks,twlinks, trlinks, telinks, alinks, nlinks
         
 #linkinfo = CsvOpener.CsvOpen(0,'query','gravity')
 #ilinkstest = linkinfo[5]

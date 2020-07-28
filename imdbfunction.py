@@ -34,7 +34,7 @@ class ImdbFunction :
     #test = ImdbFunction.getIMDB(0, 'gravity')
     #print(test)
 
-    def getIMDBData(self, i) :
+    def getIMDBData(self, i, dummy) :
         #tic = time.perf_counter()
         IMDBDataList = []
         for url in i :
