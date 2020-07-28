@@ -16,7 +16,7 @@ from webscraper import NasaFunction
 
 class AppFunction:
     def app(self, q,size,genType):
-        pool = ThreadPool(processes=4)
+        pool = ThreadPool(processes=3)
         
         #----------- Initialize Class Objects -----------#
         redditFunction = RedditFunction()
@@ -76,16 +76,15 @@ class AppFunction:
         #----------- Get Link Data -----------#
         #get pageview data from Wikipedia
         wdata = wikipediaFunction.getWikiData(w)
-        #start thread for get Title, Cumulative Worldwide Box Office Gross, Rating, number of Ratings from IMDb
-        iThread = pool.apply_async(imdbFunction.getIMDBData, (i))
+        #get Title, Cumulative Worldwide Box Office Gross, Rating, number of Ratings from IMDb
+        idata = imdbFunction.getIMDBData(i)
         #get Twitter Likes for posts
         tdata = ttuples
         #get Steam player data
         sdata = steamFunction.getSteamData(s)
         #get Twitch data
         twdata = twitchFunction.getTwitchData(tw_ids)
-        #get iThread
-        idata = iThread.get()
+
         
         #-------- Get Curriculum Threads -----------#
         a = aThread.get()
