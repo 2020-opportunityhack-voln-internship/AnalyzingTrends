@@ -56,13 +56,14 @@ class AppFunction:
             t.append(a_tuple[0])
         tw,tw_ids = twitchFunction.getTwitch(q, size)
         print('got twitch')
+        r = rThread.get()
+        print('got reddit')
         tr = trendsFunction.getTrends(q, genType)
         print('got trends')
         n = nasaFunction.NasaScraper(q, size)
         print('got nasa')
         #get thread running for reddit's output
-        r = rThread.get()
-        print('got reddit')
+
         
         #toc = time.perf_counter()
         #print(f"did the thing in {toc - tic:0.4f} seconds")
