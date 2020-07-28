@@ -87,7 +87,7 @@ class RedditFunction :
         for date in final_data.keys():
             newdate = datetime.strptime(date,'%Y-%m')
             newfinal_data[newdate]=final_data[date]
-        print(newfinal_data)
+            
         #current_time = datetime.datetime.now()
         #current_time_utc = datetime.utc()
         #print(current_time, current_time_utc)
@@ -105,7 +105,7 @@ class RedditFunction :
         elif genType=='query':
             plt.savefig('static/images/query/reddit.png',bbox_inches='tight')
             
-        
+        print('done in reddit thread')
         return fulllinks[:size]
     
 #tic = time.perf_counter()

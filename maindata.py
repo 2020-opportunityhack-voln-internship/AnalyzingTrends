@@ -49,6 +49,7 @@ class AppFunction:
         y = youtubeFunction.getYouTube(q, size)
         print('got youtube')
         s = steamFunction.getSteam(q, size)
+        print('got steam')
         t=[]
         ttuples = twitterFunction.getTwitter(q, size)
         print('got twitter')
@@ -85,21 +86,25 @@ class AppFunction:
         #----------- Get Link Data -----------#
         #get pageview data from Wikipedia
         wdata = wikipediaFunction.getWikiData(w)
+        print('got wiki data')
         #get Title, Cumulative Worldwide Box Office Gross, Rating, number of Ratings from IMDb
         idata = imdbFunction.getIMDBData(i)
+        print('got imdb data')
         #get Twitter Likes for posts
         tdata = ttuples
+        print('got twitter data')
         #get Steam player data
         sdata = steamFunction.getSteamData(s)
+        print('got steam data')
         #get Twitch data
         twdata = twitchFunction.getTwitchData(tw_ids)
-        print('got data')
+        print('got twitch data')
         
         #-------- Get Curriculum Threads -----------#
         a = aThread.get()
-        print('finished askdruniverse')
+        print('got askdruniverse')
         te = teThread.get()
-        print('finished teachengineering')  
+        print('got teachengineering')  
         
         print(te)
         print(a)
@@ -110,10 +115,12 @@ class AppFunction:
         #----------- Output Links to CSV -----------#
         csvOutput.csvwrite(mylist, q, genType)
         #----------- Generate Graphs -----------#
+        print('starting graphs')
         wikipediaFunction.getWikiGraph(wdata, q, genType)
         steamFunction.getSteamGraph(sdata, q, genType)
         imdbFunction.getIMDBGraph(idata, q, genType)
         twitchFunction.getTwitchGraph(twdata, q, genType)
+        print('finished graphs')
         return('Finished')
     
     

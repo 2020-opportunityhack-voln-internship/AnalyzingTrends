@@ -68,6 +68,7 @@ class ScrapeFunction:
         # df.to_csv(filename,index=False)       
         linkstest = df['links'].tolist()
         browser.quit()
+        print('done in askdruniverse')
         return linkstest
 
     
@@ -136,6 +137,7 @@ class ScrapeFunction:
         #df.to_csv(filename,index=False)
         linkstest = df['links'].tolist()
         browser.quit()
+        print('done in teachengineering')
         return linkstest
     
     # web scraper for two websites:
