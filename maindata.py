@@ -12,6 +12,7 @@ import time
 import datetime as dt
 from multiprocessing.pool import ThreadPool
 from websites_scraper import ScrapeFunction
+from webscraper import NasaFunction
 
 class AppFunction:
     def app(self, q,size,genType):
@@ -28,6 +29,7 @@ class AppFunction:
         twitchFunction = TwitchFunction()
         trendsFunction = TrendsFunction()
         scrapeFunction = ScrapeFunction()
+        nasaFunction = NasaFunction()
 
 
         #tic = time.perf_counter()
@@ -37,8 +39,8 @@ class AppFunction:
         rThread = pool.apply_async(redditFunction.getPushshiftData, (100, (dt.date.today() - dt.timedelta(days = (731))),(dt.date.today()), q, size, genType))
         #------Start Curriculum Threads--------#
         aThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'askdruniverse', size,genType))
-        
         teThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'teachengineering', size,genType))
+        
         #get URLs from IMDb, Wikipedia, Youtube, Steam, and Twitter
         i = imdbFunction.getIMDB(q, size)
         w = wikipediaFunction.getWiki(q, size)
@@ -50,6 +52,7 @@ class AppFunction:
             t.append(a_tuple[0])
         tw,tw_ids = twitchFunction.getTwitch(q, size)
         tr = trendsFunction.getTrends(q, genType)
+        n = nasaFunction.NasaScraper(q, size)
         #get thread running for reddit's output
         r = rThread.get()
         
@@ -67,7 +70,7 @@ class AppFunction:
         print(t)
         print(tw)
         print(tr)
-
+        print(n)
  
         
         #----------- Get Link Data -----------#
@@ -94,7 +97,7 @@ class AppFunction:
         print(a)
         
         #----------- Merge URL lists-----------#
-        mylist = r + i + w + y + s + t + tw + tr + te + a
+        mylist = r + i + w + y + s + t + tw + tr + te + a + n
         
         #----------- Output Links to CSV -----------#
         csvOutput.csvwrite(mylist, q, genType)

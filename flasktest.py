@@ -45,10 +45,10 @@ def my_form_post():
     trlinks = Markup(linkinfo[7])
     telinks = Markup(linkinfo[8])
     alinks = Markup(linkinfo[9])
-
+    nlinks = Markup(linkinfo[10])
     location = '/query/'
     qname = ""
-    return render_template('return_form.html',processed_size=processed_size,processed_text=processed_text,random=randomn,imdblinks=ilinks,wikilinks=wlinks,steamlinks=slinks,redditlinks=rlinks,twitterlinks=tlinks,youlinks=ylinks,twitchlinks = twlinks,trendlinks = trlinks,location = location, qname = qname, telinks = telinks, alinks = alinks)
+    return render_template('return_form.html',processed_size=processed_size,processed_text=processed_text,random=randomn,imdblinks=ilinks,wikilinks=wlinks,steamlinks=slinks,redditlinks=rlinks,twitterlinks=tlinks,youlinks=ylinks,twitchlinks = twlinks,trendlinks = trlinks,location = location, qname = qname, telinks = telinks, alinks = alinks, nlinks = nlinks)
 
 @app.route('/suggested')
 def suggested_form():
