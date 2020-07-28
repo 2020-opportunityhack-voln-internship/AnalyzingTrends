@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from redditfunction import RedditFunction
+from redditgraph import RedditFunction
 from imdbfunction import ImdbFunction
 from csvoutput import CsvOutput
 from wikipediafunction import WikipediaFunction
@@ -34,7 +34,7 @@ class AppFunction:
         
         #----------- Call Link Fetch Functions -----------#
         #Run reddit in seperate thread to reduce execution time
-        rThread = pool.apply_async(redditFunction.getPushshiftData, (100, (dt.date.today() - dt.timedelta(days = (731))),(dt.date.today()), q, size))
+        rThread = pool.apply_async(redditFunction.getPushshiftData, (100, (dt.date.today() - dt.timedelta(days = (731))),(dt.date.today()), q, size, genType))
         #------Start Curriculum Threads--------#
         aThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'askdruniverse', size,genType))
         
@@ -73,15 +73,16 @@ class AppFunction:
         #----------- Get Link Data -----------#
         #get pageview data from Wikipedia
         wdata = wikipediaFunction.getWikiData(w)
-        #get Title, Cumulative Worldwide Box Office Gross, Rating, number of Ratings from IMDb
-        idata = imdbFunction.getIMDBData(i)
+        #start thread for get Title, Cumulative Worldwide Box Office Gross, Rating, number of Ratings from IMDb
+        iThread = pool.apply_async(imdbFunction.getIMDBData, (i))
         #get Twitter Likes for posts
         tdata = ttuples
         #get Steam player data
         sdata = steamFunction.getSteamData(s)
         #get Twitch data
         twdata = twitchFunction.getTwitchData(tw_ids)
-        
+        #get iThread
+        idata = iThread.get()
         
         #-------- Get Curriculum Threads -----------#
         a = aThread.get()
