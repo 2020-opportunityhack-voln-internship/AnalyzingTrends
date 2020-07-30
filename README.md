@@ -12,12 +12,22 @@ To Run on Heroku:
       https://github.com/heroku/heroku-buildpack-google-chrome
       https://github.com/heroku/heroku-buildpack-chromedriver
   3. Under your app's "Settings" tab, add the following Config Variables: 
+      ```
       CHROMEDRIVER_PATH : /app/.chromedriver/bin/chromedriver
       GOOGLE_CHROME_BIN : /app/.apt/usr/bin/google-chrome
+      ```
   4. Under "Deploy" press "Deploy Branch".
 
 To Run locally:
-  1. Install the version of Chromedriver relevant to your operating system: https://chromedriver.chromium.org/
-  2. In "websites_scraper.py", remove line 28 "chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")".
-  3. In the same file, change line 36 and 79 from "browser = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH") ,options=chrome_options)" to "browser = webdriver.Chrome(executable_path = PATH\TO\DRIVER ,options=chrome_options)", replacing the path with the location of the driver you installed previously.
-  4. Use the "app" method in "maindata.py".
+  1. Install required dependencies listed in requirements.txt. `pip install -r /path/to/requirements.txt`
+    - Note: Due to a bug with the existing twitterscraper library on PyPi, it has been modified and included in the project files.
+  2. Install the version of Chromedriver relevant to your operating system: https://chromedriver.chromium.org/
+  3. In "websites_scraper.py", remove line 28 `chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")`
+  4. In the same file, change line 36 and 79 from `browser = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH") ,options=chrome_options)` to `browser = webdriver.Chrome(executable_path = PATH\TO\DRIVER ,options=chrome_options)`, replacing the path with the location of the driver you installed previously.
+  5. Use the "app" method in "maindata.py".
+
+## Ways to contribute
+All contributions are welcome!
+- Pull Requests to this repository
+- Furthering the project in your own repository
+- Joining [Opportunity Hack](https://github.com/opportunity-hack/2020-summer-volunteer-internship/blob/master/README.md)!
