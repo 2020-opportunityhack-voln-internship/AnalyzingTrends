@@ -10,7 +10,7 @@ class ImdbFunction :
 
     def getIMDB(self, q, size) :
  
-        queryi = q.replace(" ","-")
+        queryi = q.replace(" ","-").lower()
         url = ('https://www.imdb.com/search/keyword/?keywords=' + str(queryi) + '&ref_=fn_kw_kw_1&mode=detail&page=1&sort=moviemeter,asc')
         resp = requests.get(url)
         http_encoding = resp.encoding if 'charset' in resp.headers.get('content-type', '').lower() else None
