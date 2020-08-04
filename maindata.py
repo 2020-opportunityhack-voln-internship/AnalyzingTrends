@@ -16,7 +16,7 @@ from webscraper import NasaFunction
 
 class AppFunction:
     def app(self, q,size,genType):
-        pool = ThreadPool(processes=4)
+        pool = ThreadPool(processes=5)
         
         #----------- Initialize Class Objects -----------#
         redditFunction = RedditFunction()
@@ -36,20 +36,19 @@ class AppFunction:
         print('starting')
         #----------- Call Link Fetch Functions -----------#
         #Run reddit in seperate thread to reduce execution time
+        try:
+            imThread = pool.apply_async(imdbFunction.getIMDB, (q, size))
+            print('started imdb thread')
+        except: 
+            print('could not find imdb')
+            i = []
         rThread = pool.apply_async(redditFunction.getPushshiftData, (100, (dt.date.today() - dt.timedelta(days = (731))),(dt.date.today()), q, size, genType))
         #------Start Curriculum Threads--------#
         aThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'askdruniverse', size,genType))
         teThread = pool.apply_async(scrapeFunction.scrapWebsite, (q, 'teachengineering', size,genType))
+        
         print('started initial threads')
         #get URLs from IMDb, Wikipedia, Youtube, Steam, and Twitter
-        try:
-            i = imdbFunction.getIMDB(q, size)
-            print('got imdb')
-        except: 
-            print('could not find imdb')
-            i = []
-        iThread = pool.apply_async(imdbFunction.getIMDBData, (i, 'dummy'))
-        print('started imdbthread')
         try:
             w = wikipediaFunction.getWiki(q, size)
             print('got wikipedia')
@@ -62,6 +61,14 @@ class AppFunction:
         except:
             print('could not find youtube')
             y=[]
+        try:
+            i = imThread.get()
+            print('got first imdb thread')
+        except:
+            print('could not find first imdb thread')
+            i=[]
+        iThread = pool.apply_async(imdbFunction.getIMDBData, (i, 'dummy'))
+        print('started second imdb thread')
         try:
             s = steamFunction.getSteam(q, size)
             print('got steam')
@@ -185,6 +192,7 @@ class AppFunction:
         csvOutput.csvwrite(mylist, q, genType)
         #----------- Generate Graphs -----------#
         print('starting graphs')
+        
         try:
             wikipediaFunction.getWikiGraph(wdata, q, genType)
         except:
@@ -194,7 +202,7 @@ class AppFunction:
         except:
             print('could not find steam graph')
         try:
-            imdbFunction.getIMDBGraph(idata, q, genType)
+            imdbFunction.getIMDBGraph, (idata, q, genType)
         except:
             print('could not find imdbgraph')
         try:
@@ -206,5 +214,7 @@ class AppFunction:
     
     
 
-    
-    #app(0,'gravity',5,'query')
+    # tic = time.perf_counter()
+    # app(0,'virus',5,'query')
+    # toc = time.perf_counter()
+    # print(f"did the thing in {toc - tic:0.4f} seconds")
