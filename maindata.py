@@ -202,7 +202,8 @@ class AppFunction:
         except:
             print('could not find steam graph')
         try:
-            imdbFunction.getIMDBGraph, (idata, q, genType)
+            imdbFunction.getIMDBGraph(idata, q, genType)
+            print('got imdb graph')
         except:
             print('could not find imdbgraph')
         try:
@@ -215,6 +216,6 @@ class AppFunction:
     
 
     # tic = time.perf_counter()
-    # app(0,'virus',5,'query')
+    #app(0,'virus',5,'query')
     # toc = time.perf_counter()
     # print(f"did the thing in {toc - tic:0.4f} seconds")
