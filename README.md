@@ -8,9 +8,11 @@ To Run on Heroku:
   2. Create a free Heroku account and add a new app.
   3. Connect your app to your fork using the GitHub option under your app's "Deploy" tab.
   4. Under your app's "Settings" tab, add the following buildpacks:
+      ```
       heroku/python
       https://github.com/heroku/heroku-buildpack-google-chrome
       https://github.com/heroku/heroku-buildpack-chromedriver
+      ```
   3. Under your app's "Settings" tab, add the following Config Variables: 
       ```
       CHROMEDRIVER_PATH : /app/.chromedriver/bin/chromedriver
@@ -25,6 +27,8 @@ To Run locally:
   3. In "websites_scraper.py", remove line 28 `chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")`
   4. In the same file, change line 36 and 79 from `browser = webdriver.Chrome(executable_path = os.environ.get("CHROMEDRIVER_PATH") ,options=chrome_options)` to `browser = webdriver.Chrome(executable_path = PATH\TO\DRIVER ,options=chrome_options)`, replacing the path with the location of the driver you installed previously.
   5. Use the "app" method in "maindata.py".
+## Diagrams
+
 
 ## Ways to contribute
 All contributions are welcome!
