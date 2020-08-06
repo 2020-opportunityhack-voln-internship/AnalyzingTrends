@@ -73,15 +73,15 @@ def suggested_form_post():
     ilinks = Markup(linkinfo[5])
     twlinks = Markup(linkinfo[6])
     trlinks = Markup(linkinfo[7])
+    telinks = Markup(linkinfo[8])
+    alinks = Markup(linkinfo[9])
+    nlinks = Markup(linkinfo[10])
     location = '/suggested/'
     qname = str(q).replace(' ','_')
     qname = '_' + str(qname)
-    return render_template('return_form.html',processed_size=processed_size,processed_text=processed_text,random=randomn,imdblinks=ilinks,wikilinks=wlinks,steamlinks=slinks,redditlinks=rlinks,twitterlinks=tlinks,youlinks=ylinks,twitchlinks = twlinks,trendlinks = trlinks,location=location, qname = qname)
+    return render_template('return_form.html',processed_size=processed_size,processed_text=processed_text,random=randomn,imdblinks=ilinks,wikilinks=wlinks,steamlinks=slinks,redditlinks=rlinks,twitterlinks=tlinks,youlinks=ylinks,twitchlinks = twlinks,trendlinks = trlinks,location=location, qname = qname, telinks = telinks, alinks = alinks, nlinks = nlinks)
 
-@app.route('/selentest')
-def testscrape():
-    test = scrapeFunction.scrapWebsite("acid", 'askdruniverse', 5)
-    return render_template('oldindex.html')
+
 
 if __name__ == "__main__":
     app.run(host="localhost", port=int("777"),debug=True,use_reloader=False)

@@ -50,7 +50,7 @@ class SteamFunction :
             try:
                 testmonths = []
                 peaks = []
-                app = url.replace('https://store.steampowered.com','https://steamcharts.com')[0:35]
+                app = 'https://steamcharts.com/app/' + str(url.replace('https://store.steampowered.com','').split('/')[2])
                 resp=requests.get(app)
                 http_encoding = resp.encoding if 'charset' in resp.headers.get('content-type', '').lower() else None
                 html_encoding = EncodingDetector.find_declared_encoding(resp.content, is_html=True)
@@ -101,8 +101,9 @@ class SteamFunction :
         except:
              print('steam broke')
 
-# q = 'gravity'
-# s = SteamFunction.getSteam(0, q , 4)
+# q = 'acid'
+# s = SteamFunction.getSteam(0, q , 5)
+# print(s)
 # sdata = SteamFunction.getSteamData(0, s)
 # SteamFunction.getSteamGraph(0, sdata, q, 'query')
 
